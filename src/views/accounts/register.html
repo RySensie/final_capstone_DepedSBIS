@@ -1,0 +1,474 @@
+<style>
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+  }
+
+  .wave {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    z-index: -1;
+  }
+
+  .container {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 5rem;
+    padding: 0 2rem;
+  }
+  .scroll {
+      max-height: 600px;
+      overflow-y: auto;
+    }
+  .img {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .login-content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+   
+  }
+ .card {
+    width: 600px;
+  }
+
+  .img img {
+    width: 500px;
+    float: left;
+
+  }
+
+
+  .login-content img {
+    height: 100px;
+  }
+
+  .login-content h2 {
+    margin: 15px 0;
+    color: #333;
+    text-transform: uppercase;
+    font-size: 2.9rem;
+  }
+
+  .login-content .input-div {
+    position: relative;
+    display: grid;
+    grid-template-columns: 7% 93%;
+    margin: 25px 0;
+    padding: 5px 0;
+    border-bottom: 2px solid #00008B;
+  }
+
+  /* .login-content .input-div.one {
+    margin-top: 0;
+  } */
+
+  .i {
+    color: #00008B;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .i i {
+    transition: .3s;
+  }
+
+  .input-div>div {
+    position: relative;
+    height: 45px;
+  }
+
+  .input-div>div>h5 {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 18px;
+    transition: .3s;
+  }
+
+  .input-div:before,
+  .input-div:after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    width: 0%;
+    height: 2px;
+    background-color: #9F9FFF;
+    transition: .4s;
+  }
+
+  .input-div:before {
+    right: 50%;
+  }
+
+  .input-div:after {
+    left: 50%;
+  }
+
+  .input-div.focus:before,
+  .input-div.focus:after {
+    width: 50%;
+  }
+
+  .input-div.focus>div>h5 {
+    top: -5px;
+    font-size: 15px;
+  }
+
+  .input-div.focus>.i>i {
+    color: #9F9FFF;
+  }
+
+  .input-div>div>input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: none;
+    padding: 0.5rem 0.7rem;
+    font-size: 1.2rem;
+    color: #555;
+    font-family: 'poppins', sans-serif;
+  }
+
+  .input-div.pass {
+    margin-bottom: 4px;
+  }
+
+  a {
+    display: block;
+    text-align: right;
+    text-decoration: none;
+    color: #00008B;
+    font-size: 0.9rem;
+    transition: .3s;
+  }
+
+  a:hover {
+    color: #9F9FFF;
+  }
+
+  .btn {
+    display: block;
+    width: 100%;
+    height: 50px;
+    border-radius: 25px;
+    outline: none;
+    border: none;
+    background-color: #00008B;
+    background-size: 200%;
+    font-size: 1.2rem;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
+    margin: 1rem 0;
+    cursor: pointer;
+    transition: .5s;
+    margin-bottom: 5px;
+  }
+
+  .btn:hover {
+    background-position: right;
+  }
+
+
+  @media screen and (max-width: 1050px) {
+    .container {
+      grid-gap: 5rem;
+    }
+  }
+
+  @media screen and (max-width: 1000px) {
+    form {
+      width: 290px;
+    }
+
+    .login-content h2 {
+      font-size: 2.4rem;
+      margin: 8px 0;
+    }
+
+    .img img {
+      width: 400px;
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    .container {
+      grid-template-columns: 1fr;
+    }
+
+    .img {
+      display: none;
+    }
+
+    .wave {
+      display: none;
+    }
+
+    .login-content {
+      justify-content: center;
+    }
+  }
+</style>
+<img class="wave" src="assets/img/wave.png">
+<div class="container">
+  <div class="img">
+    <img src="assets/img/bg.png">
+  </div>
+  <div class="login-content px-3">
+    <div class="card scroll">
+      <div class="card-body">
+        <div class="col-sm-12">
+          <div class="mb-3 mt-3">
+            <h3 class="text-center">SIGN UP</h3>
+            {{#if message }}
+            <div class="alert alert-{{alert}}" role="alert">
+              <strong>Alert!</strong> {{message}}
+            </div>
+
+            {{/if}}
+          </div>
+
+          <form class="" method="POST" action="/signup" enctype="multipart/form-data">
+            <div class="form-row">
+              <div class="col-6 mb-3 mt-2 text-left">    
+                <img id="logoResult" class="rounded rounded-2" width="195" height="200" />
+                <input id="uploads" name="logo" type="file" accept=".jpg,.jpeg" onchange="readURLs(this);"
+                  class="form-control border-0" required />
+                  <label class="form-control-label" for="building-number">SCHOOL LOGO</label>
+              </div>
+              <div class="col-6 text-right">
+              
+                <img id="imageResult" class="rounded rounded-2" width="195" height="200" />
+                <input id="upload" name="image" type="file" accept=".jpg,.jpeg" onchange="readURL(this);"
+                  class="form-control border-0" required />
+                  <label class="form-control-label" for="building-number">PROFILE IMAGE</label>
+              </div>
+
+              <div class="col-md-12 mb-2">
+                <label class="form-control-label">SCHOOL NAME</label>
+                <select class='form-control fstdropdown-select' searchdisable="true" id="second" name="schoolName"
+                  required>
+
+                  {{#each list_data}}
+                  <option data-schoolID="{{this.schoolId}}" data-address="{{this.address}}"
+                    value="{{this.schoolName}}">{{this.schoolName}}</option>
+                  {{/each}}
+                </select>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label class="form-control-label" for="validationTooltip04">SCHOOL ADDRESS</label>
+                <input type="text" class="form-control" id="address" value="" placeholder="" name="address"
+                  readonly>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-control-label" for="validationTooltip05">SCHOOL ID</label>
+                <input type="text" class="form-control" id="schoolID" placeholder="" name="schoolId" readonly>
+              </div>
+
+
+              <div class="col-md-6 mb-3">
+                <label class="form-control-label" for="validationTooltip01">FIRSTNAME</label>
+                <input type="text" class="form-control" id="validationTooltip01" placeholder="" name="firstname"
+                  required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-control-label" for="validationTooltip02">LASTNAME</label>
+                <input type="text" class="form-control" id="validationTooltip02" placeholder="" name="lastname"
+                  required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-control-label" for="validationTooltip01">EMAIL</label>
+                <input type="email" class="form-control" id="validationTooltip01" placeholder="" name="email"
+                  required>
+
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-control-label" for="validationTooltip02">PASSWORD</label>
+                <input type="password" class="form-control" id="validationTooltip02" placeholder=""
+                  name="password" required>
+              </div>
+            </div>
+            <div> 
+              <a href="/login">Login Account</a>
+            </div>
+            <div class="text-center">
+              <button class="btn btn-primary" type="submit">SUBMIT</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script>
+  const inputs = document.querySelectorAll(".input");
+
+
+  function addcl() {
+    let parent = this.parentNode.parentNode;
+    parent.classList.add("focus");
+  }
+
+  function remcl() {
+    let parent = this.parentNode.parentNode;
+    if (this.value == "") {
+      parent.classList.remove("focus");
+    }
+  }
+
+
+  inputs.forEach(input => {
+    input.addEventListener("focus", addcl);
+    input.addEventListener("blur", remcl);
+  });
+
+</script>
+  <!-- UPLAOD Image -->
+  <script>
+    /*  ==========================================
+      SHOW UPLOADED IMAGE
+  * ========================================== */
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+  
+        reader.onload = function (e) {
+          $("#imageResult").attr("src", e.target.result);
+          $("#imgdatainputs").val(e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+  
+    $(function () {
+      $("#upload").on("change", function () {
+        readURL(input);
+      });
+    });
+  
+    /*  ==========================================
+      SHOW UPLOADED IMAGE NAME
+  * ========================================== */
+      // var input = document.getElementById("upload");
+      // var infoArea = document.getElementById("upload-label");
+  
+      // input.addEventListener("change", showFileName);
+      // function showFileName(event) {
+      //   var input = event.srcElement;
+      //   var fileName = input.files[0].name;
+      //   infoArea.textContent = "File name: " + fileName;
+      // }
+  </script>
+  <!-- UPLAOD  LOGO Image -->
+  <script>
+    /*  ==========================================
+        SHOW UPLOADED IMAGE
+    * ========================================== */
+    function readURLs(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+  
+        reader.onload = function (e) {
+          $("#logoResult").attr("src", e.target.result);
+          $("#imgdatainput").val(e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+  
+    $(function () {
+      $("#uploads").on("changes", function () {
+        readURLs(input);
+      });
+    });
+  
+    /*  ==========================================
+      SHOW UPLOADED IMAGE NAME
+  * ========================================== */
+      // var input = document.getElementById("uploads");
+      // var infoArea = document.getElementById("upload-labels");
+  
+      // input.addEventListener("changes", showFileName);
+      // function showFileName(event) {
+      //   var input = event.srcElement;
+      //   var fileName = input.files[0].name;
+      //   infoArea.textContent = "File name: " + fileName;
+      // }
+  </script>
+  
+  <!------------------------
+     SELECT WITH DROPDOWN 
+    ------------------------->
+  <script>
+    function setDrop() {
+      if (!document.getElementById('third').classList.contains("fstdropdown-select"))
+        document.getElementById('third').className = 'fstdropdown-select';
+      setFstDropdown();
+    }
+    setFstDropdown();
+    function removeDrop() {
+      if (document.getElementById('third').classList.contains("fstdropdown-select")) {
+        document.getElementById('third').classList.remove('fstdropdown-select');
+        document.getElementById("third").fstdropdown.dd.remove();
+        document.querySelector("#third~.fstdiv").remove();
+      }
+    }
+    function addOptions(add) {
+      var select = document.getElementById("fourth");
+      for (var i = 0; i < add; i++) {
+        var opt = document.createElement("option");
+        var o = Array.from(document.getElementById("fourth").querySelectorAll("option")).slice(-1)[0];
+        var last = o == undefined ? 1 : Number(o.value) + 1;
+        opt.text = opt.value = last;
+        select.add(opt);
+      }
+    }
+    function removeOptions(remove) {
+      for (var i = 0; i < remove; i++) {
+        var last = Array.from(document.getElementById("fourth").querySelectorAll("option")).slice(-1)[0];
+        if (last == undefined)
+          break;
+        Array.from(document.getElementById("fourth").querySelectorAll("option")).slice(-1)[0].remove();
+      }
+    }
+    function updateDrop() {
+      document.getElementById("fourth").fstdropdown.rebind();
+    }
+  </script>
+  <!-- **************************** get select script ****************************** -->
+  <script>
+    $('#second').on('change', function () {
+      var address = $(this).find(":selected").attr('data-address');
+      var schoolID = $(this).find(":selected").attr('data-schoolId');
+      $("#address").val(address);
+      $("#schoolID").val(schoolID);
+  
+  
+    });
+  </script>

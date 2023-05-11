@@ -1,0 +1,1953 @@
+{{> admin-sidenav dashboard=true}}
+<div class="main-content" id="panel">
+  {{> admin-topnav dashboard=true mode=primary}}
+  <!-- Page content -->
+  <div class="header bg-primary pb-6">
+    <div class="container-fluid">
+      <div class="header-body">
+        <!-- Card stats -->
+        <div class="row">
+          <div class="col-xl-3 col-md-6">
+            <div class="card card-stats">
+              <!-- Card body -->
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-blue mb-0">
+                      School
+                    </h5>
+                    <span class="h2 font-weight-bold mb-0"
+                      >{{total_school}}</span
+                    >
+                  </div>
+                  <div class="col-auto">
+                    <div
+                      class="icon icon-shape bg-gradient-blue text-white rounded-circle shadow"
+                    >
+                      <i class="ni ni-building"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="mt-3 mb-0 text-sm">
+                  <span class="text-blue mr-2"
+                    ><i class="ni ni-building mr-2"></i
+                  ></span>
+                  <span class="text-nowrap"> Total No. of Schools</span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+            <div class="card card-stats">
+              <!-- Card body -->
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-orange mb-0">
+                      USER
+                    </h5>
+                    <span class="h2 font-weight-bold mb-0">
+                      {{total_users}}</span
+                    >
+                  </div>
+                  <div ni-circle-08 class="col-auto">
+                    <div
+                      class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow"
+                    >
+                      <i class="ni ni-shop"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="mt-3 mb-0 text-sm">
+                  <span class="text-orange mr-2"
+                    ><i class="ni ni-shop"></i
+                  ></span>
+                  <span class="text-nowrap"> Total No. of User</span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+            <div class="card card-stats">
+              <!-- Card body -->
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-red mb-0">
+                      ROOM
+                    </h5>
+                    <span class="h2 font-weight-bold mb-0">{{total_room}}</span>
+                  </div>
+                  <div class="col-auto">
+                    <div
+                      class="icon icon-shape bg-gradient-red text-white rounded-circleshadow"
+                    >
+                      <i class="ni ni-money-coins"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="mt-3 mb-0 text-sm">
+                  <span class="text-danger mr-2"
+                    ><i class="ni ni-money-coins"></i
+                  ></span>
+                  <span class="text-nowrap">Total No. of Rooms</span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+            <div class="card card-stats">
+              <!-- Card body -->
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-success mb-0">
+                      BUILDING
+                    </h5>
+                    <span class="h2 font-weight-bold mb-0">
+                      {{total_building}}</span
+                    >
+                  </div>
+                  <div ni-circle-08 class="col-auto">
+                    <div
+                      class="icon icon-shape bg-gradient-green text-white rounded-circle shadow"
+                    >
+                      <i class="ni ni-money-coins"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="mt-3 mb-0 text-sm">
+                  <span class="text-success mr-2"
+                    ><i class="ni ni-money-coins"></i
+                  ></span>
+                  <span class="text-nowrap"> Total No. of building</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page content -->
+  <div class="container-fluid mt--6">
+    <div class="row">
+      <!-- <div class="col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <canvas class="ml-2" id="myChart" width="500" height="280"></canvas>
+          </div>
+        </div>
+      </div> -->
+      <div class="col-sm-12">
+        <form method="get" action="/admin/dashboard">
+          <div class="col-12 input-group mb-3">
+            <div class="input-group-prepend">
+              <button class="btn btn-primary" type="submit" id="button-addon2">
+                FILTER DATE
+              </button>
+              <button
+                onclick="location.href='/admin/dashboard';"
+                type="button"
+                class="btn btn-icon me-2 btn-danger"
+              >
+                <span class="ni ni-calendar-grid-58"></span>
+              </button>
+            </div>
+            <input type="text" name="daterange" />
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-xl-12 mt-2">
+      <div class="card">
+        <div class="card-header border-0">
+          <div class="row align-items-center">
+            <div class="col-xl-12 text-center">
+              <h3 class="">BUILDING DAMAGE REQUEST</h3>
+            </div>
+            <!-- <div class="col text-right">
+                <a href="/admin/school" class="btn btn-sm btn-primary">See all</a>
+              </div> -->
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush" id="breq">
+            <thead class="thead-light">
+              <tr>
+                <th scope="">Action</th>
+                <th>Building Number</th>
+                <th>School</th>
+                <!-- <th scope="col">Condition</th> -->
+                <th scope="">Condition</th>
+                <th>Damage Structures</th>
+                <th scope="">Date Requested</th>
+                <th>Status</th>
+               
+              </tr>
+            </thead>
+            <tbody>
+              {{#each building_damage}}
+              <tr class="">
+                <td class="">
+                  <div class="dropdown">
+                    <a
+                      class="btn btn-sm btn-icon-only text-light"
+                      href="#"
+                      role="button"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      <i class="fas fa-ellipsis-v"></i>
+                    </a>
+                    <div
+                      class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"
+                    >
+                      <a
+                        class="dropdown-item requestBtn font-weight-bold text-primary"
+                        data-img="{{this.actual_img}}"
+                        data-num="{{this.buildingNumber}}"
+                        span
+                        data-con="{{this.buildingCondition}}"
+                        data-stat="{{this.status}}"
+                        data-note="{{this.note}}"
+                        data-percentage="{{this.percentage}}"
+                        data-description="{{this.description}}"
+                        data-schlname="{{this.school_id.schoolName}}"
+                        data-ceiling="{{this.ceiling}}"
+                        data-ceiling_img="{{this.ceiling_img}}"
+                        data-ceiling_lvl_dmg="{{this.ceiling_lvl_dmg}}"
+                        data-ceiling_description="{{this.ceiling_description}}"
+                        data-column="{{this.column}}"
+                        data-column_img="{{this.column_img}}"
+                        data-column_lvl_dmg="{{this.column_lvl_dmg}}"
+                        data-column_description="{{this.column_description}}"
+                        data-roof="{{this.roof}}"
+                        data-roof_img="{{this.roof_img}}"
+                        data-roof_lvl_dmg="{{this.roof_lvl_dmg}}"
+                        data-roof_description="{{this.roof_description}}"
+                        data-stair="{{this.stair}}"
+                        data-stair_img="{{this.stair_img}}"
+                        data-stair_lvl_dmg="{{this.stair_lvl_dmg}}"
+                        data-stair_description="{{this.stair_description}}"
+                        data-wall="{{this.wall}}"
+                        data-wall_img="{{this.wall_img}}"
+                        data-wall_lvl_dmg="{{this.wall_lvl_dmg}}"
+                        data-wall_description="{{this.wall_description}}"
+                        data-etc="{{this.etc}}"
+                        data-etc_img="{{this.etc_img}}"
+                        data-etc_lvl_dmg="{{this.etc_lvl_dmg}}"
+                        data-etc_description="{{this.etc_description}}"
+                        ><i class="material-icons mb-0 mr-2"> visibility </i
+                        >VIEW</a
+                      >
+                      {{#ifCond this.status '===' 'REQUESTED'}}
+                      <a
+                        class="dropdown-item buildingOnProccess font-weight-bold text-primary"
+                        data-id="{{this._id}}"
+                        ><i class="material-icons mb-0 mr-2"> thumb_up_alt </i
+                        >PROCESS</a
+                      >
+
+                      {{else}}
+                      <a
+                        class="dropdown-item approveBtn font-weight-bold text-primary"
+                        data-id="{{this._id}}"
+                        ><i class="material-icons mb-0 mr-2"> thumb_up_alt </i
+                        >APPROVED</a
+                      >
+                      {{/ifCond}}
+
+                      <!-- <a class="dropdown-item deleteBtn" data-id="{{this._id}}">Delete Building</a> -->
+                    </div>
+                  </div>
+                </td>
+                <td scope="font-weight-bold">{{this.buildingNumber}}</td>
+                <td scope="font-weight-bold" style="font-weight: bold">
+                  {{this.school_id.schoolName}}
+                </td>
+                <td class="text-danger" style="font-weight: bold">
+                  {{this.buildingCondition}}
+                </td>
+                <td>
+                  {{#ifCond this.ceiling '===' 'CEILING'}}
+                  <span
+                    class="badge badge-danger font-weight-bold mr-2"
+                    style="font-size: 10px"
+                    >{{this.ceiling}} - {{this.ceiling_lvl_dmg}}%</span
+                  >
+                  {{else}} {{/ifCond}} {{#ifCond this.column '===' 'COLUMN'}}
+                  <span
+                    class="badge badge-danger font-weight-bold mr-2"
+                    style="font-size: 10px"
+                    >{{this.column}} - {{this.column_lvl_dmg}}%</span
+                  >
+                  {{else}} {{/ifCond}} {{#ifCond this.roof '===' 'ROOF'}}
+                  <span
+                    class="badge badge-danger font-weight-bold mr-2"
+                    style="font-size: 10px"
+                    >{{this.roof}} - {{this.roof_lvl_dmg}}%</span
+                  >
+                  {{else}} {{/ifCond}} {{#ifCond this.stair '===' 'STAIRS'}}
+                  <span
+                    class="badge badge-danger font-weight-bold mr-2"
+                    style="font-size: 10px"
+                    >{{this.stair}} - {{this.stair_lvl_dmg}}%</span
+                  >
+                  {{else}} {{/ifCond}} {{#ifCond this.wall '===' 'WALL'}}
+                  <span
+                    class="badge badge-danger font-weight-bold mr-2"
+                    style="font-size: 10px"
+                    >{{this.wall}} - {{this.wall_lvl_dmg}}%</span
+                  >
+                  {{else}} {{/ifCond}} {{#ifCond this.etc '===' 'ETC'}}
+                  <span
+                    class="badge badge-danger font-weight-bold mr-2"
+                    style="font-size: 10px"
+                    >{{this.etc}}. - {{this.etc_lvl_dmg}}%</span
+                  >
+                  {{else}} {{/ifCond}}
+                </td>
+                <td>{{moment this.requestedAt 'lll'}}</td>
+                <td class="font-weight-bold">{{this.status}}</td>
+                <!-- <td class="text-danger">{{this.percentage}}%</td> -->
+                <!-- <td class="">{{this.note}}</td> -->
+                <!-- <td class="">
+                    <button class="btn btn-sm btn-primary requestBtn" data-id="{{this._id}}"
+                      data-img="{{this.actual_img}}" data-num="{{this.buildingNumber}}"
+                      data-con="{{this.buildingCondition}}" data-stat="{{this.status}}" data-note="{{this.note}}"
+                      data-percentage="{{this.percentage}}" data-roof="{{this.roof}}" data-stair="{{this.stair}}"
+                      data-wall="{{this.wall}}" data-ceiling="{{this.ceiling}}" data-column="{{this.column}}" data-description="{{this.description}}"
+                      data-schlname="{{this.school_id.schoolName}}"
+                      data-etc_img="{{this.etc_img}}" data-column_img="{{this.column_img}}" data-ceiling_img="{{this.ceiling_img}}"
+                      ><span class="material-icons">
+                        visibility
+                      </span></button>
+                    <button class="btn btn-sm btn-success approveBtn" data-id="{{this._id}}"><span
+                        class="material-icons">
+                        thumb_up_alt
+                      </span></button>
+                  </td> -->
+
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-12 mt-5">
+      <div class="card">
+        <div class="card-header border-0">
+          <div class="row align-items-center">
+            <div class="col-sm-12 text-center">
+              <h3 class="">ROOM DAMAGE REQUEST</h3>
+            </div>
+            <!-- <div class="col text-right">
+                <a href="/admin/school" class="btn btn-sm btn-primary">See all</a>
+              </div> -->
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush" id="rreq">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Action</th>
+                <th scope="col">Room Number</th>
+                <th scope="col">Building Number</th>
+                <th scope="col">School</th>
+                <th class="font-weight-bold">Condition</th>
+                <th>Damage Structures</th>
+                <th class="font-weight-bold">Status</th>
+                <th>Date Requested</th>
+             
+              </tr>
+            </thead>
+            <tbody>
+              {{#each room_damage}}
+              <tr>
+                <td class="">
+                  <div class="dropdown">
+                    <a
+                      class="btn btn-sm btn-icon-only text-light"
+                      href="#"
+                      role="button"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      <i class="fas fa-ellipsis-v"></i>
+                    </a>
+                    <div
+                      class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"
+                    >
+                      <a
+                        class="dropdown-item requestBtn1 font-weight-bold text-primary"
+                        data-id="{{this._id}}"
+                        data-img1="{{this.actual_img}}"
+                        data-rnum="{{this.roomNumber}}"
+                        data-rcon="{{this.roomCondition}}"
+                        data-rstat="{{this.status}}"
+                        data-rnote="{{this.note}}"
+                        data-bnum="{{this.building_id.buildingNumber}}"
+                        data-flr="{{this.floor}}"
+                        data-door="{{this.door}}"
+                        data-door_img="{{this.door_img}}"
+                        data-door_lvl_dmg="{{this.door_lvl_dmg}}"
+                        data-door_description="{{this.door_description}}"
+                        data-window="{{this.window}}"
+                        data-window_img="{{this.window_img}}"
+                        data-window_lvl_dmg="{{this.window_lvl_dmg}}"
+                        data-window_description="{{this.window_description}}"
+                        data-ceiling="{{this.ceiling}}"
+                        data-ceiling_img="{{this.ceiling_img}}"
+                        data-ceiling_lvl_dmg="{{this.ceiling_lvl_dmg}}"
+                        data-ceiling_description="{{this.ceiling_description}}"
+                        data-toilet="{{this.toilet}}"
+                        data-toilet_img="{{this.toilet_img}}"
+                        data-toilet_lvl_dmg="{{this.toilet_lvl_dmg}}"
+                        data-toilet_description="{{this.toilet_description}}"
+                        data-electric="{{this.electric}}"
+                        data-electric_img="{{this.electric_img}}"
+                        data-electric_lvl_dmg="{{this.electric_lvl_dmg}}"
+                        data-electric_description="{{this.electric_description}}"
+                        data-other="{{this.other}}"
+                        data-other_img="{{this.other_img}}"
+                        data-other_lvl_dmg="{{this.other_lvl_dmg}}"
+                        data-other_description="{{this.other_description}}"
+                        data-rschlname="{{this.school_id.schoolName}}"
+                        ><i class="material-icons mb-0 mr-2"> visibility </i
+                        >VIEW</a
+                      >
+                      {{#ifCond this.status '===' 'REQUESTED'}}
+                      <a
+                        class="dropdown-item room_processBnt font-weight-bold text-primary"
+                        data-id="{{this._id}}"
+                        id="{{this._id}}"
+                        ><i class="material-icons mb-0 mr-2"> thumb_up_alt </i
+                        >PROCESS</a
+                      >
+                      {{else}}
+                      <a
+                        class="dropdown-item approveBtn1 font-weight-bold text-primary"
+                        data-id2="{{this._id}}"
+                        ><i class="material-icons mb-0 mr-2"> thumb_up_alt </i
+                        >APPROVED</a
+                      >
+                      {{/ifCond}}
+
+                      <!-- <a class="dropdown-item deleteBtn" data-id="{{this._id}}">Delete Building</a> -->
+                    </div>
+                  </div>
+                </td>
+                <td class="font-weight-bold">{{this.roomNumber}}</td>
+                <td class="font-weight-bold">
+                  {{this.building_id.buildingNumber}}
+                </td>
+                <td scope="row font-weight-bold">
+                  {{this.school_id.schoolName}}
+                </td>
+                <!-- <td class="text-danger">{{this.roomCondition}}</td> -->
+                <td class="text-danger font-weight-bold">
+                  {{this.roomCondition}}
+                </td>
+                <td>
+                  {{#ifCond this.ceiling '===' 'CEILING'}}
+                  <span
+                    class="badge badge-danger font-weight-bold mr-2"
+                    style="font-size: 10px"
+                    >{{this.ceiling}} - {{this.ceiling_lvl_dmg}}%</span
+                  >
+                  {{else}} {{/ifCond}} {{#ifCond this.door '===' 'DOOR'}}
+                  <span
+                    class="badge badge-danger font-weight-bold mr-2"
+                    style="font-size: 10px"
+                    >{{this.door}} - {{this.door_lvl_dmg}}%</span
+                  >
+                  {{else}} {{/ifCond}} {{#ifCond this.electric '==='
+                  'ELECTRIC'}}
+                  <span
+                    class="badge badge-danger font-weight-bold mr-2"
+                    style="font-size: 10px"
+                    >{{this.electric}} - {{this.electric_lvl_dmg}}%</span
+                  >
+                  {{else}} {{/ifCond}} {{#ifCond this.toilet '===' 'TOILET'}}
+                  <span
+                    class="badge badge-danger font-weight-bold mr-2"
+                    style="font-size: 10px"
+                    >{{this.toilet}} - {{this.toilet_lvl_dmg}}%</span
+                  >
+                  {{else}} {{/ifCond}} {{#ifCond this.window '===' 'WINDOW'}}
+                  <span
+                    class="badge badge-danger font-weight-bold mr-2"
+                    style="font-size: 10px"
+                    >{{this.window}} - {{this.window_lvl_dmg}}%</span
+                  >
+                  {{else}} {{/ifCond}} {{#ifCond this.other '===' 'OTHER'}}
+                  <span
+                    class="badge badge-danger font-weight-bold mr-2"
+                    style="font-size: 10px"
+                    >{{this.other}}. - {{this.other_lvl_dmg}}%</span
+                  >
+                  {{else}} {{/ifCond}}
+                </td>
+                <td class="font-weight-bold">{{this.status}}</td>
+                <td class="font-weight-bold">{{moment this.requestedAt 'lll'}}</td>
+  
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-12">
+      <div class="card">
+        <div class="card-header border-0">
+          <div class="row align-items-center">
+            <div class="col-sm-12 text-center">
+              <h3 class="">OTHER REQUEST</h3>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush" id="req">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">School</th>
+                <th scope="col">Request</th>
+                <th scope="col">Specific Request</th>
+                <th scope="col">Status</th>
+                <th scope="col">Note</th>
+                <th>Date Requested</th>
+                <th scope="col">Approved</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each request}}
+              <tr>
+                <td scope="row">{{this.school_id.schoolName}}</td>
+                <td scope="row">{{this.name}}</td>
+                <td class="">{{this.specific}}</td>
+                <td class="text-danger">{{this.status}}</td>
+                <td class="">{{this.note}}</td>
+                <td class="font-weight-bold">{{moment this.requestedAt 'lll'}}</td>
+                <td class="">
+                  <button
+                    class="btn btn-sm btn-success approveBtn3"
+                    data-id3="{{this._id}}"
+                  >
+                    <span class="material-icons"> thumb_up_alt </span>
+                  </button>
+                </td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-12">
+      <div class="card">
+        <div class="card-header border-0">
+          <div class="row align-items-center">
+            <div class="col-sm-7 text-center">
+              <!-- <h3 class="">SUMMARY REPORTS</h3> -->
+            </div>
+            <div class="col-sm-5 text-right">
+              <button
+                class="btn btn-warning"
+                onclick="PrintElem('print')"
+                id="check"
+              >
+                <span class="material-icons"> local_printshop </span>
+              </button>
+              <a href="/admin/school" class="btn btn-primary btn-primary"
+                ><span class="material-icons"> visibility </span></a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="card-body" id="print">
+          <div class="row justify-content-md-center mt-2 mb-5">
+            <div class="col-md-auto text-center">
+              <img
+                src="/assets/img/logo/image.png"
+                alt="..."
+                class="rounded-circle"
+                height="90"
+              /><br />
+              <small
+                class="mt-3 font-weight-bold"
+                style="font-family: Times New Roman"
+                >Republick of the Philippines</small
+              ><br />
+              <small
+                class="mt-3 font-weight-bold"
+                style="font-family: Times New Roman"
+                >Department of Education</small
+              ><br />
+              <small
+                class="mt-0 font-weight-bold"
+                style="font-family: Times New Roman"
+                >Region X – Northern Mindanao</small
+              ><br />
+              <small
+                class="mt-3 font-weight-bold"
+                style="font-family: Times New Roman"
+                >DIVISION OF MALAYBALAY CITY</small
+              ><br />
+              <!-- <small class="mt-0 font-weight-bold"style="font-family: Times New Roman">Sayre Highway, Casisang, Malaybalay City</small><br>
+                <small class="mt-3 font-weight-bold"style="font-family: Times New Roman">email: malaybalay.city@deped.gov.ph / depedmalaybalay@gmail.com</small><br>
+                <small class="mt-0 font-weight-bold"style="font-family: Times New Roman">Telefax: (088) 314-0094</small> -->
+            </div>
+          </div>
+          <!-- <div class="row justify-content-md-center mt-2 mb-5">
+              <div class="col col-lg-2 text-right school_logo">
+                <img src="/assets/img/logo/image.png" alt="..." class="rounded-circle" height="90">
+              </div>
+              <div class="col-md-auto text-center">
+
+                <small class="mt-3 font-weight-bold" style="font-family: Times New Roman">Department of Education</small><br>
+                <small class="mt-0 font-weight-bold"style="font-family: Times New Roman">Region X – Northern Mindanao</small><br>
+                <small class="mt-3 font-weight-bold"style="font-family: Times New Roman">DIVISION OF MALAYBALAY CITY</small><br>
+                <small class="mt-0 font-weight-bold"style="font-family: Times New Roman">Sayre Highway, Casisang, Malaybalay City</small><br>
+                <small class="mt-3 font-weight-bold"style="font-family: Times New Roman">email: malaybalay.city@deped.gov.ph / depedmalaybalay@gmail.com</small><br>
+                <small class="mt-0 font-weight-bold"style="font-family: Times New Roman">Telefax: (088) 314-0094</small>
+              </div>
+              <div class="col col-lg-2 text-left school_logo">
+                <img src="/assets/img/logo/MC.png" alt="" class="rounded-circle" height="90">
+              </div>
+            </div> -->
+          <div class="table-responsive">
+            <!-- Projects table -->
+            <table class="table align-items-center table-flush" id="report">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">SCHOOLS</th>
+                  <th scope="col">SCHOOL ID</th>
+                  <!-- <th scope="col">ADDRESS</th> -->
+                  <th scope="col">BUILDINGS</th>
+                  <th scope="col">BUILDINGS WATER & SANITATION</th>
+                  <th scope="col">ROOMS</th>
+                  <th scope="col">FACILITIES</th>
+                  <th scope="col">FURNITURE</th>
+                  <!-- <th scope="col">SCHOOL WATER & SANITATION</th> -->
+                </tr>
+              </thead>
+              <tbody>
+                {{#each all}}
+                <tr>
+                  <td class="text-default">{{this.schoolName}}</td>
+                  <td class="text-default">{{this.schoolId}}</td>
+                  <!-- <td class="text-default">{{this.address}}</td> -->
+                  <td class="text-success">{{total_buildings}}</td>
+                  <td class="text-success">{{total_bwsf}}</td>
+                  <td class="text-success">{{total_rooms}}</td>
+                  <td class="text-success">{{total_facilities}}</td>
+                  <td class="text-success">{{total_furniture}}</td>
+                  <!-- <td class="text-success">{{total_sbwsf}}</td> -->
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--  ***************** REQUEST Building Modal *********************** -->
+<div
+  class="modal fade requestBuilding"
+  data-backdrop="static"
+  tabindex="-1"
+  role="dialog"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="card-header">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-xl-12 text-center mt-4">
+            <h2 class="">BUILDING INFORMATION</h2>
+          </div>
+          <div class="col-xl-5">
+            <input type="text" id="_id1" hidden />
+            <img class="img-thumbnail" id="img_edit" />
+          </div>
+        </div>
+        <div class="row col-sm-12">
+          <div class="col-xl-6 pt-3">
+            <label>School Name</label>
+            <input
+              class="form-control text-blue"
+              type="text"
+              name=""
+              id="school"
+              value="school"
+              disabled
+            />
+          </div>
+          <div class="col-xl-4 pt-3">
+            <label>Building Number</label>
+            <input
+              class="form-control text-blue"
+              type="text"
+              name=""
+              id="num"
+              value="num"
+              disabled
+            />
+          </div>
+          <div class="col-xl-4 pt-3">
+            <label>Building Condition</label>
+            <input
+              class="form-control text-red"
+              type="text"
+              name=""
+              id="con"
+              value="con"
+              disabled
+            />
+          </div>
+          <div class="col-xl-4 pt-3">
+            <label>Status</label>
+            <input
+              class="form-control text-red"
+              type="text"
+              name=""
+              id="stat"
+              value="stat"
+              disabled
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-12">
+            <div class="row">
+              <div class="col-xl-12 text-center mt-4">
+                <h3 class="">BUILDING DAMAGES</h3>
+              </div>
+              <div class="building_structure">
+                <div class="row col-sm-12 mb-2" id="ceiling_structure">
+                  <div class="col-sm-6">
+                    <h5>Ceiling Structure</h5>
+                    <img class="img-thumbnail" id="ceiling_img_edit" />
+                  </div>
+                  <div class="row col-xl-12">
+                    <div class="col-sm-3">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="cel"
+                        readonly
+                      />
+                    </div>
+                    <div class="col-sm-2">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="ceil_ceiling_lvl_dmg"
+                        readonly
+                      />
+                    </div>
+                    <div class="col-sm-7">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="ceil_ceiling_description"
+                        readonly
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row col-sm-12 mb-2" id="column_structure">
+                  <div class="col-sm-6">
+                    <h5>Column Structure</h5>
+                    <img class="img-thumbnail" id="col_img_edit" />
+                  </div>
+                  <div class="row col-xl-12">
+                    <div class="col-sm-3">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="col"
+                        readonly
+                      />
+                    </div>
+                    <div class="col-sm-2">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="col_column_lvl_dmg"
+                        readonly
+                      />
+                    </div>
+                    <div class="col-sm-7">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="col_column_description"
+                        readonly
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row col-sm-12 mb-2" id="roof_structure">
+                  <div class="col-sm-6">
+                    <h5>Roof Structure</h5>
+                    <img class="img-thumbnail" id="roof_img_edit" />
+                  </div>
+                  <div class="row col-xl-12">
+                    <div class="col-sm-3">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="roof"
+                        readonly
+                      />
+                    </div>
+                    <div class="col-sm-2">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="col_roof_lvl_dmg"
+                        readonly
+                      />
+                    </div>
+                    <div class="col-sm-7">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="col_roof_description"
+                        readonly
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row col-sm-12 mb-2" id="stair_structure">
+                  <div class="col-sm-6">
+                    <h5>Stairs Structure</h5>
+                    <img class="img-thumbnail" id="stair_img_edit" />
+                  </div>
+                  <div class="row col-xl-12">
+                    <div class="col-sm-3">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="stair"
+                        readonly
+                      />
+                    </div>
+                    <div class="col-sm-2">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="str_stair_lvl_dmg"
+                        readonly
+                      />
+                    </div>
+                    <div class="col-sm-7">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="str_stair_description"
+                        readonly
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row col-sm-12 mb-2" id="wall_structure">
+                  <div class="col-sm-6">
+                    <h5>Wall Structure</h5>
+                    <img class="img-thumbnail" id="wall_img_edit" />
+                  </div>
+                  <div class="row col-xl-12">
+                    <div class="col-sm-3">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="wall"
+                        readonly
+                      />
+                    </div>
+                    <div class="col-sm-2">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="wall_wall_lvl_dmg"
+                        readonly
+                      />
+                    </div>
+                    <div class="col-sm-7">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="wall_wall_description"
+                        readonly
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row col-sm-12 mb-2" id="etc_structure">
+                  <div class="col-sm-6">
+                    <h5>ETC. Structure</h5>
+                    <img class="img-thumbnail" id="etc_img_edit" />
+                  </div>
+                  <div class="row col-xl-12">
+                    <div class="col-sm-3">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="etc"
+                        readonly
+                      />
+                    </div>
+                    <div class="col-sm-2">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="etc_etc_lvl_dmg"
+                        readonly
+                      />
+                    </div>
+                    <div class="col-sm-7">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="etc_etc_description"
+                        readonly
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- <div class="col-sm-4">
+                <label></label>
+                <input
+                  class="form-control text-danger"
+                  type="text"
+                  name=""
+                  id="stair"
+                  readonly
+                />
+              </div>
+              <div class="col-sm-4">
+                <label></label>
+                <input
+                  class="form-control text-danger"
+                  type="text"
+                  name=""
+                  id="wall"
+                  readonly
+                />
+              </div>
+              <div class="col-sm-4">
+                <label></label>
+                <input
+                  class="form-control text-danger"
+                  type="text"
+                  name=""
+                  id="cel"
+                  readonly
+                />
+              </div>
+              <div class="col-sm-4">
+                <label></label>
+                <input
+                  class="form-control text-danger"
+                  type="text"
+                  name=""
+                  id="clmn"
+                  readonly
+                />
+              </div> -->
+            </div>
+          </div>
+          <!-- <div class="col-xl-12 text-center mt-4">
+            <h3 class="">BUILDING CONDITION</h3>
+          </div> -->
+          <!-- <div class="col-xl-6 pt-3">
+            <label>School Name</label>
+            <input class="form-control text-blue" type="text" name="" id="school" value="school" disabled>
+          </div>
+          <div class="col-xl-4 pt-3">
+            <label>Building Number</label>
+            <input class="form-control text-blue" type="text" name="" id="num" value="num" disabled>
+          </div>
+          <div class="col-xl-4 pt-3">
+            <label>LEVEL OF DAMAGE</label>
+            <input class="form-control text-red" type="text" name="" id="per" readonly>
+          </div>
+          <div class="col-xl-4 pt-3">
+            <label>Building Condition</label>
+            <input class="form-control text-red" type="text" name="" id="con" value="con" disabled>
+          </div>
+          <div class="col-xl-4 pt-3">
+            <label>Status</label>
+            <input class="form-control text-red" type="text" name="" id="stat" value="stat" disabled>
+          </div> -->
+        </div>
+        <div class="row">
+          <div class="col-xl-12 pt-2">
+            <label for="exampleFormControlTextarea1">DESCRIPTIONS</label>
+            <textarea
+              class="form-control text-blue"
+              id="description"
+              aria-valuemax="description"
+              rows="3"
+              disabled
+            ></textarea>
+          </div>
+          <div class="col-xl-12 pt-2">
+            <label for="exampleFormControlTextarea1">Note</label>
+            <textarea
+              class="form-control text-blue"
+              id="note"
+              aria-valuemax="note"
+              rows="3"
+              disabled
+            ></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- **************************** REQUEST APPROVED BUILDING Modal ****************************** -->
+<div class="modal fade approvedModal" data-backdrop="static">
+  <div class="modal-dialog modal-confirm">
+    <div class="modal-content">
+      <div class="modal-header flex-column">
+        <div class="icon-box">
+          <i class="material-icons">thumb_up</i>
+        </div>
+        <h4 class="modal-title w-100">Are you sure?</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-hidden="true"
+        >
+          &times;
+        </button>
+      </div>
+      <form action="/admin/approved" method="POST">
+        <div class="modal-body">
+          <p>
+            Do you really want to approved this request? This process cannot be
+            undone.
+          </p>
+          <input type="hidden" id="req_id" name="id" />
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-primary">Approved</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- **************************** REQUEST ON PROCESS BUILDING Modal ****************************** -->
+<div class="modal fade BprocessModal" data-backdrop="static">
+  <div class="modal-dialog modal-confirm">
+    <div class="modal-content">
+      <div class="modal-header flex-column">
+        <div class="icon-box">
+          <i class="material-icons">thumb_up</i>
+        </div>
+        <h4 class="modal-title w-100">Are you sure?</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-hidden="true"
+        >
+          &times;
+        </button>
+      </div>
+      <form action="/admin/processed" method="POST">
+        <div class="modal-body">
+          <p>
+            Do you really want to process this request? Request will be
+            processed and soon will be approved.
+          </p>
+          <input type="hidden" id="proceess_building_id" name="id" />
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-primary">Process</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!--  ***************** REQUEST Room Modal *********************** -->
+<div
+  class="modal fade requestRoom"
+  data-backdrop="static"
+  tabindex="-1"
+  role="dialog"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="card-header">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-xl-12 text-center mt-4">
+            <h2 class="">ROOM INFORMATION</h2>
+          </div>
+          <div class="col-xl-6">
+            <input type="text" id="_id1" hidden />
+            <img class="img-thumbnail" id="img_edit1" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-6 pt-3">
+            <label>School Name</label>
+            <input
+              class="form-control text-blue"
+              type="text"
+              name=""
+              id="rschool"
+              value="rschool"
+              disabled
+            />
+          </div>
+          <div class="col-xl-4 pt-3">
+            <label>Building Number</label>
+            <input
+              class="form-control text-blue"
+              type="text"
+              name=""
+              id="bnum"
+              value="bnum"
+              disabled
+            />
+          </div>
+          <div class="col-xl-4 pt-3">
+            <label>Floor</label>
+            <input
+              class="form-control text-blue"
+              type="text"
+              name=""
+              id="flr"
+              value="flr"
+              disabled
+            />
+          </div>
+          <div class="col-xl-4 pt-3">
+            <label>Room Number</label>
+            <input
+              class="form-control text-blue"
+              type="text"
+              name=""
+              id="rnum"
+              value="rnum"
+              disabled
+            />
+          </div>
+          <div class="col-xl-4 pt-3">
+            <label>Room Condition</label>
+            <input
+              class="form-control text-red"
+              type="text"
+              name=""
+              id="rcon"
+              value="rcon"
+              disabled
+            />
+          </div>
+          <div class="col-xl-4 pt-3">
+            <label>Status</label>
+            <input
+              class="form-control text-red"
+              type="text"
+              name=""
+              id="rstat"
+              value="rstat"
+              disabled
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-12 pt-2">
+            <label for="exampleFormControlTextarea1">Note</label>
+            <textarea
+              class="form-control text-blue"
+              id="rnote"
+              aria-valuemax="rnote"
+              rows="3"
+              disabled
+            ></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-12">
+            <div class="row">
+              <div class="col-xl-12 text-center mt-4">
+                <h3 class="">DAMAGE STRUCTURE</h3>
+              </div>
+              <div class="building_structure">
+                <div class="row col-sm-12 mb-2" id="room_cel_struc">
+                  <div class="col-sm-6">
+                    <h5>Ceiling Structure</h5>
+                    <img class="img-thumbnail" id="room_ceiling_img" />
+                  </div>
+                  <div class="row col-xl-12">
+                    <div class="col-sm-3">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="room_cel"
+                        readonly
+                      />
+                    </div>
+                    <div class="col-sm-2">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="room_ceiling_lvl_dmg"
+                        readonly
+                      />
+                    </div>
+                    <div class="col-sm-7">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="room_ceiling_description"
+                        readonly
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row col-sm-12 mb-2" id="room_door_struc">
+                  <div class="col-sm-6">
+                    <h5>Door Structure</h5>
+                    <img class="img-thumbnail" id="room_door_img" />
+                  </div>
+                  <div class="row col-xl-12">
+                    <div class="col-sm-3">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="room_door"
+                        readonly
+                      />
+                    </div>
+                    <div class="col-sm-2">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="room_door_lvl_dmg"
+                        readonly
+                      />
+                    </div>
+                    <div class="col-sm-7">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="room_door_description"
+                        readonly
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row col-sm-12 mb-2" id="room_elec_struc">
+                  <div class="col-sm-6">
+                    <h5>Electrical Component Structure</h5>
+                    <img class="img-thumbnail" id="room_electric_img" />
+                  </div>
+                  <div class="row col-xl-12">
+                    <div class="col-sm-3">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="room_electric"
+                        readonly
+                      />
+                    </div>
+                    <div class="col-sm-2">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="room_electric_lvl_dmg"
+                        readonly
+                      />
+                    </div>
+                    <div class="col-sm-7">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="room_electric_description"
+                        readonly
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row col-sm-12 mb-2" id="room_toi_struc">
+                  <div class="col-sm-6">
+                    <h5>Toilet Structure</h5>
+                    <img class="img-thumbnail" id="room_toilet_img" />
+                  </div>
+                  <div class="row col-xl-12">
+                    <div class="col-sm-3">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="room_toilet"
+                        readonly
+                      />
+                    </div>
+                    <div class="col-sm-2">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="room_toilet_lvl_dmg"
+                        readonly
+                      />
+                    </div>
+                    <div class="col-sm-7">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="room_toilet_description"
+                        readonly
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row col-sm-12 mb-2" id="room_wind_struc">
+                  <div class="col-sm-6">
+                    <h5>Window Structure</h5>
+                    <img class="img-thumbnail" id="room_window_img" />
+                  </div>
+                  <div class="row col-xl-12">
+                    <div class="col-sm-3">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="room_window"
+                        readonly
+                      />
+                    </div>
+                    <div class="col-sm-2">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="room_window_lvl_dmg"
+                        readonly
+                      />
+                    </div>
+                    <div class="col-sm-7">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="room_window_description"
+                        readonly
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row col-sm-12 mb-2" id="room_other_struc">
+                  <div class="col-sm-6">
+                    <h5>Other Structure</h5>
+                    <img class="img-thumbnail" id="room_other_img" />
+                  </div>
+                  <div class="row col-xl-12">
+                    <div class="col-sm-3">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="room_other"
+                        readonly
+                      />
+                    </div>
+                    <div class="col-sm-2">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="room_other_lvl_dmg"
+                        readonly
+                      />
+                    </div>
+                    <div class="col-sm-7">
+                      <label></label>
+                      <input
+                        class="form-control text-danger"
+                        type="text"
+                        name=""
+                        id="room_other_description"
+                        readonly
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- **************************** REQUEST APPROVED ROOM Modal ****************************** -->
+<div class="modal fade approvedModal1" data-backdrop="static">
+  <div class="modal-dialog modal-confirm">
+    <div class="modal-content">
+      <div class="modal-header flex-column">
+        <div class="icon-box">
+          <i class="material-icons">thumb_up</i>
+        </div>
+        <h4 class="modal-title w-100">Are you sure?</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-hidden="true"
+        >
+          &times;
+        </button>
+      </div>
+      <form action="/admin/approvedRoom" method="POST">
+        <div class="modal-body">
+          <p>
+            Do you really want to approved this request? This process cannot be
+            undone.
+          </p>
+          <input type="hidden" id="aprvd" name="id1" />
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-primary">Approved</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- **************************** REQUEST PROCESS ROOM Modal ****************************** -->
+<div class="modal fade RprocessModal" data-backdrop="static">
+  <div class="modal-dialog modal-confirm">
+    <div class="modal-content">
+      <div class="modal-header flex-column">
+        <div class="icon-box">
+          <i class="material-icons">thumb_up</i>
+        </div>
+        <h4 class="modal-title w-100">Are you sure?</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-hidden="true"
+        >
+          &times;
+        </button>
+      </div>
+      <form action="/admin/processRoom" method="POST">
+        <div class="modal-body">
+          <p>
+            Do you really want to process this request? Request will be
+            processed and soon will be approved.
+          </p>
+          <input type="hidden" id="Rprocess_id" name="_id" />
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-primary">Process</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- **************************** REQUEST APPROVED OTHER Modal ****************************** -->
+<div class="modal fade approvedModal3" data-backdrop="static">
+  <div class="modal-dialog modal-confirm">
+    <div class="modal-content">
+      <div class="modal-header flex-column">
+        <div class="icon-box">
+          <i class="material-icons">thumb_up</i>
+        </div>
+        <h4 class="modal-title w-100">Are you sure?</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-hidden="true"
+        >
+          &times;
+        </button>
+      </div>
+      <form action="/admin/approvedOther" method="POST">
+        <div class="modal-body">
+          <p>
+            Do you really want to approved this request? This process cannot be
+            undone.
+          </p>
+          <input type="hidden" id="otherAprv" name="id3" />
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-primary">Approved</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  function PrintElem(elem) {
+    var restorepage = $("body").html();
+    var printcontent = $("#" + elem).clone();
+    $("body").empty().html(printcontent);
+    window.print();
+    $("body").html(restorepage);
+  }
+</script>
+
+<!-- ****************************request building script************************************************** -->
+<script>
+  $(".requestBtn").click(function () {
+    $("#_id").val($(this).attr("data-id"));
+    $("#img_edit").attr("src", $(this).attr("data-img"));
+    $("#num").val($(this).attr("data-num"));
+    $("#con").val($(this).attr("data-con"));
+    $("#stat").val($(this).attr("data-stat"));
+    $("#note").val($(this).attr("data-note"));
+    $("#per").val($(this).attr("data-percentage"));
+    $("#roof").val($(this).attr("data-roof"));
+    $("#stair").val($(this).attr("data-stair"));
+    $("#wall").val($(this).attr("data-wall"));
+
+    $("#clmn").val($(this).attr("data-column"));
+    $("#school").val($(this).attr("data-schlname"));
+    $("#description").val($(this).attr("data-description"));
+
+    // $("#ceiling_img_edit").attr("src", $(this).attr("data-ceiling_img"));
+    let ceilinng_lvl_dmg = $(this).attr("data-ceiling_lvl_dmg");
+    if (ceilinng_lvl_dmg <= 0 || ceilinng_lvl_dmg == null) {
+      var x = document.getElementById("ceiling_structure");
+      x.style.display = "none";
+    } else {
+      $("#cel").val($(this).attr("data-ceiling"));
+      $("#ceiling_img_edit").attr("src", $(this).attr("data-ceiling_img"));
+      let lvl_damg = $(this).attr("data-ceiling_lvl_dmg");
+      $("#ceil_ceiling_lvl_dmg").val(`${lvl_damg}%`);
+      $("#ceil_ceiling_description").val(
+        $(this).attr("data-ceiling_description")
+      );
+    }
+    let column_lvl_dmg = $(this).attr("data-column_lvl_dmg");
+    if (column_lvl_dmg <= 0 || column_lvl_dmg == null) {
+      var x = document.getElementById("column_structure");
+      x.style.display = "none";
+    } else {
+      $("#col").val($(this).attr("data-ceiling"));
+      $("#col_img_edit").attr("src", $(this).attr("data-ceiling_img"));
+      let lvl_damg = $(this).attr("data-column_lvl_dmg");
+      $("#col_column_lvl_dmg").val(`${lvl_damg}%`);
+      $("#col_column_description").val($(this).attr("data-column_description"));
+    }
+    let roof_lvl_dmg = $(this).attr("data-roof_lvl_dmg");
+    if (roof_lvl_dmg <= 0 || roof_lvl_dmg == null) {
+      var x = document.getElementById("roof_structure");
+      x.style.display = "none";
+    } else {
+      $("#roof").val($(this).attr("data-roof"));
+      $("#roof_img_edit").attr("src", $(this).attr("data-roof_img"));
+      let lvl_damg = $(this).attr("data-roof_lvl_dmg");
+      $("#col_roof_lvl_dmg").val(`${lvl_damg}%`);
+      $("#col_roof_description").val($(this).attr("data-roof_description"));
+    }
+    let stair_lvl_dmg = $(this).attr("data-stair_lvl_dmg");
+    if (stair_lvl_dmg <= 0 || stair_lvl_dmg == null) {
+      var x = document.getElementById("stair_structure");
+      x.style.display = "none";
+    } else {
+      $("#stair").val($(this).attr("data-stair"));
+      $("#stair_img_edit").attr("src", $(this).attr("data-stair_img"));
+      let lvl_damg = $(this).attr("data-stair_lvl_dmg");
+      $("#str_stair_lvl_dmg").val(`${lvl_damg}%`);
+      $("#str_stair_description").val($(this).attr("data-stair_description"));
+    }
+    let wall_lvl_dmg = $(this).attr("data-wall_lvl_dmg");
+    if (wall_lvl_dmg <= 0 || stair_lvl_dmg == null) {
+      var x = document.getElementById("wall_structure");
+      x.style.display = "none";
+    } else {
+      $("#wall").val($(this).attr("data-wall"));
+      $("#wall_img_edit").attr("src", $(this).attr("data-wall_img"));
+      let lvl_damg = $(this).attr("data-wall_lvl_dmg");
+      $("#wall_wall_lvl_dmg").val(`${lvl_damg}%`);
+      $("#wall_wall_description").val($(this).attr("data-wall_description"));
+    }
+    let etc_lvl_dmg = $(this).attr("data-etc_lvl_dmg");
+    if (etc_lvl_dmg <= 0 || etc_lvl_dmg == null) {
+      var x = document.getElementById("etc_structure");
+      x.style.display = "none";
+    } else {
+      $("#etc").val($(this).attr("data-etc"));
+      $("#etc_img_edit").attr("src", $(this).attr("data-etc_img"));
+      let lvl_damg = $(this).attr("data-etc_lvl_dmg");
+      $("#etc_etc_lvl_dmg").val(`${etc_lvl_dmg}%`);
+      $("#etc_etc_description").val($(this).attr("data-etc_description"));
+    }
+    $(".requestBuilding").modal("show");
+  });
+</script>
+<!-- ****************************request approved builiding script ****************************** -->
+<script>
+  $(".approveBtn").click(function () {
+    $("#req_id").val($(this).attr("data-id"));
+
+    $(".approvedModal").modal("show");
+  });
+  $(".buildingOnProccess").click(function () {
+    $("#proceess_building_id").val($(this).attr("data-id"));
+
+    $(".BprocessModal").modal("show");
+  });
+</script>
+<!-- ****************************request room script************************************************** -->
+<script>
+  $(".requestBtn1").click(function () {
+    $("#_id1").val($(this).attr("data-id1"));
+    $("#img_edit1").attr("src", $(this).attr("data-img1"));
+    $("#rnum").val($(this).attr("data-rnum"));
+    $("#rcon").val($(this).attr("data-rcon"));
+    $("#rstat").val($(this).attr("data-rstat"));
+    $("#rnote").val($(this).attr("data-rnote"));
+    $("#bnum").val($(this).attr("data-bnum"));
+    $("#flr").val($(this).attr("data-flr"));
+    // $("#pers").val($(this).attr("data-percentage"));
+    // $("#dr").val($(this).attr("data-door"));
+    // $("#wnd").val($(this).attr("data-window"));
+    // $("#flring").val($(this).attr("data-flooring"));
+    // $("#bm").val($(this).attr("data-beam"));
+    // $("#clmn").val($(this).attr("data-column"));
+    // $("#brd").val($(this).attr("data-board"));
+    // $("#wll").val($(this).attr("data-wall"));
+    // $("#ceil").val($(this).attr("data-ceiling"));
+    // $("#toi").val($(this).attr("data-toilet"));
+    // $("#elec").val($(this).attr("data-electric"));
+    $("#rschool").val($(this).attr("data-rschlname"));
+
+    let ceiling_lvl_dmg = $(this).attr("data-ceiling_lvl_dmg");
+    if (ceiling_lvl_dmg <= 0 || ceiling_lvl_dmg == null) {
+      var x = document.getElementById("room_cel_struc");
+      x.style.display = "none";
+    } else {
+      $("#room_cel").val($(this).attr("data-ceiling"));
+      $("#room_ceiling_img").attr("src", $(this).attr("data-ceiling_img"));
+      let lvl_damg = $(this).attr("data-ceiling_lvl_dmg");
+      $("#room_ceiling_lvl_dmg").val(`${ceiling_lvl_dmg}%`);
+      $("#room_ceiling_description").val(
+        $(this).attr("data-ceiling_description")
+      );
+    }
+    let door_lvl_dmg = $(this).attr("data-door_lvl_dmg");
+    if (door_lvl_dmg <= 0 || door_lvl_dmg == null) {
+      var x = document.getElementById("room_door_struc");
+      x.style.display = "none";
+    } else {
+      $("#room_door").val($(this).attr("data-door"));
+      $("#room_door_img").attr("src", $(this).attr("data-door_img"));
+      let lvl_damg = $(this).attr("data-column_lvl_dmg");
+      $("#room_door_lvl_dmg").val(`${door_lvl_dmg}%`);
+      $("#room_door_description").val($(this).attr("data-door_description"));
+    }
+    let electric_lvl_dmg = $(this).attr("data-electric_lvl_dmg");
+    if (electric_lvl_dmg <= 0 || electric_lvl_dmg == null) {
+      var x = document.getElementById("room_elec_struc");
+      x.style.display = "none";
+    } else {
+      $("#room_electric").val($(this).attr("data-electric"));
+      $("#room_electric_img").attr("src", $(this).attr("data-electric_img"));
+      let lvl_damg = $(this).attr("data-roof_lvl_dmg");
+      $("#room_electric_lvl_dmg").val(`${electric_lvl_dmg}%`);
+      $("#room_electric_description").val(
+        $(this).attr("data-electric_description")
+      );
+    }
+    let toilet_lvl_dmg = $(this).attr("data-toilet_lvl_dmg");
+    if (toilet_lvl_dmg <= 0 || toilet_lvl_dmg == null) {
+      var x = document.getElementById("room_toi_struc");
+      x.style.display = "none";
+    } else {
+      $("#room_toilet").val($(this).attr("data-toilet"));
+      $("#room_toilet_img").attr("src", $(this).attr("data-toilet_img"));
+      let lvl_damg = $(this).attr("data-stair_lvl_dmg");
+      $("#room_toilet_lvl_dmg").val(`${toilet_lvl_dmg}%`);
+      $("#room_toilet_description").val(
+        $(this).attr("data-toilet_description")
+      );
+    }
+    let window_lvl_dmg = $(this).attr("data-window_lvl_dmg");
+    if (window_lvl_dmg <= 0 || window_lvl_dmg == null) {
+      var x = document.getElementById("room_wind_struc");
+      x.style.display = "none";
+    } else {
+      $("#room_window").val($(this).attr("data-window"));
+      $("#room_window_img").attr("src", $(this).attr("data-window_img"));
+      let lvl_damg = $(this).attr("data-wall_lvl_dmg");
+      $("#room_window_lvl_dmg").val(`${window_lvl_dmg}%`);
+      $("#room_window_description").val(
+        $(this).attr("data-window_description")
+      );
+    }
+    let other_lvl_dmg = $(this).attr("data-other_lvl_dmg");
+    if (other_lvl_dmg <= 0 || other_lvl_dmg == null) {
+      var x = document.getElementById("room_other_struc");
+      x.style.display = "none";
+    } else {
+      $("#room_other").val($(this).attr("data-other"));
+      $("#room_other_img").attr("src", $(this).attr("data-other_img"));
+      let lvl_damg = $(this).attr("data-etc_lvl_dmg");
+      $("#room_other_lvl_dmg").val(`${other_lvl_dmg}%`);
+      $("#room_other_description").val($(this).attr("data-other_description"));
+    }
+
+    $(".requestRoom").modal("show");
+  });
+</script>
+<!-- ****************************request approved room script ****************************** -->
+<script>
+  $(".approveBtn1").click(function () {
+    $("#aprvd").val($(this).attr("data-id2"));
+
+    $(".approvedModal1").modal("show");
+  });
+  $(".room_processBnt").click(function () {
+    $("#Rprocess_id").val($(this).attr("data-id"));
+
+    $(".RprocessModal").modal("show");
+  });
+</script>
+<!-- ****************************request approved other script ****************************** -->
+<script>
+  $(".approveBtn3").click(function () {
+    $("#otherAprv").val($(this).attr("data-id3"));
+
+    $(".approvedModal3").modal("show");
+  });
+</script>
+
+<script>
+  $(document).ready(function () {
+    var building_damages =
+      "{{#renderJsonString building_damage}}{{/renderJsonString}}";
+    building_damages = JSON.parse(building_damages);
+    var data = [];
+    var b_name = [];
+    var val = [];
+    // var good = building_lists.good;
+    // var minor = building_lists.minor;
+    // var major = building_lists.major;
+    // list = [];
+
+    building_damages.forEach((index) => {
+      data.push(index.school_id.schoolName);
+      b_name.push(index.buildingNumber);
+      val.push(index.percentage);
+    });
+    console.log("data", data);
+    console.log("b_name", b_name);
+    console.log("val", val);
+    console.log("building_lists", building_damages);
+    const ctx = document.getElementById("myChart").getContext("2d");
+    const myChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: data,
+        datasets: [
+          {
+            label: "List of Schools that has building damage",
+            data: val,
+            backgroundColor: [
+              "rgba(255, 99, 132)",
+              "rgba(54, 162, 235)",
+              "rgba(255, 206, 86)",
+              "rgba(75, 192, 192)",
+              "rgba(153, 102, 255)",
+              "rgba(255, 159, 64)",
+            ],
+            borderWidth: 1,
+          },
+        ],
+      },
+
+      options: {
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            stacked: true,
+          },
+          y: {
+            stacked: true,
+          },
+        },
+      },
+    });
+  });
+</script>
+
+<!-- ****************************datatables script************************************************** -->
+<script>
+  $(document).ready(function () {
+    $("#breq").DataTable({
+      dom: "Bfrtip",
+      buttons: [],
+    });
+  });
+  $(document).ready(function () {
+    $("#rreq").DataTable({
+      dom: "Bfrtip",
+      buttons: [],
+    });
+  });
+  $(document).ready(function () {
+    $("#req").DataTable({
+      dom: "Bfrtip",
+      buttons: [],
+    });
+  });
+</script>
+<!-- DATA TABLES SCRIPT -->
+<script>
+  $(document).ready(function () {
+    $("#report").DataTable({
+      pageLength: 100,
+      dom: "Bfrtip",
+      buttons: ["copy", "excel", "pdf", "print"],
+    });
+  });
+</script>
+
+<script>
+  $(document).ready(function () {
+    $(function () {
+      $('input[name="daterange"]').daterangepicker({
+        opens: "center",
+        locale: {
+          format: "MM/DD/YYYY",
+        },
+      });
+    });
+  });
+</script>
+
+<!-- chart.js -->
+<script src="https://cdnjs.com/libraries/Chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+<script src="https://www.jsdelivr.com/package/npm/chart.js"></script>
+
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"
+/>
+<!-- <script src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>

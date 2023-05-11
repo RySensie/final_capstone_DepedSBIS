@@ -1,0 +1,285 @@
+{{> schoolAd-sidenav profile=true}}
+<div class="main-content" id="panel">
+    {{> schoolAd-topnav profile=true mode=primary}}
+    <!-- Header -->
+    <!-- Header -->
+    <div class="header pb-6 d-flex align-items-center"
+        style="min-height: 500px; padding-bottom: 50px; background-image: url(../assets/img/logo/mcshort.png); background-size: cover; background-position: center top;">
+        <!-- Mask -->
+        <span class="mask bg-gradient-default opacity-8"></span>
+        <!-- Header container -->
+        <div class="container-fluid d-flex align-items-center">
+            <div class="row">
+                <div class="col-lg-7 col-md-10">
+                    <!-- <h1 class="display-2 text-white">School Name</h1>
+                    <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with
+                        your work and manage your projects or assigned tasks</p>
+                    <a href="" class="btn btn-neutral">Edit Image</a> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page content -->
+    <div class="container-fluid mt--6">
+        <div class="row">
+            <div class="col-xl-4 order-xl-2">
+                <div class="card card-profile">
+                    <img src="{{credentials.school_profile}}" alt="Image placeholder" class="card-img-top">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-3 order-lg-2">
+                            <div class="card-profile-image">
+                                <a href="#">
+                                    <img src="{{credentials.profile_img}}" class="rounded-circle">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+                        <!-- <div class="d-flex justify-content-between">
+                            <a href="#" class="btn btn-sm btn-info  mr-4 ">Connect</a>
+                            <a href="#" class="btn btn-sm btn-default float-right">Message</a>
+                        </div> -->
+                    </div>
+                    <div class="card-body pt-0">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card-profile-stats d-flex justify-content-center">
+                                    <!-- <div>
+                                        <span class="heading">22</span>
+                                        <span class="description">Friends</span>
+                                    </div>
+                                    <div>
+                                        <span class="heading">10</span>
+                                        <span class="description">Photos</span>
+                                    </div>
+                                    <div>
+                                        <span class="heading">89</span>
+                                        <span class="description">Comments</span>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <h5 class="h3">
+                                {{credentials.firstname}} {{credentials.lastname}}
+                            </h5>
+                            <div class="h5 mt-4">
+                                <i class="ni business_briefcase-24 mr-2"></i>{{credentials.email}}
+                            </div>
+                            <div>
+                                <i class="ni education_hat mr-2"></i>{{credentials.school_name}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-8 order-xl-1">
+                <div class="card">
+                    <div class="card-body">
+
+                        <div class="row align-items-center">
+
+                            <div class="col-8">
+                                <!-- <h3 class="mb-0">Edit School </h3> -->
+                            </div>
+
+                            <div class="col-4 text-right">
+                                {{#each users}}
+                                <button class="btn btn-md btn-primary editBtn" data-email="{{this.email}}"
+                                    data-firstname="{{this.firstname}}" data-lastname="{{this.lastname}}"
+                                    data-password="{{this.password}}" data-id="{{this._id}}"
+                                    data-profile="{{this.profile_img}}" data-school_id="{{this.school_id}}">Edit
+                                    User</button>
+                                {{/each}}
+                            </div>
+                        </div>
+                        <form>
+                            {{#each users}}
+
+                            <h6 class="heading-small text-muted mb-4">User information</h6>
+                            <div class="pl-lg-4">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-email">Email
+                                                address</label>
+                                            <input type="email" class="form-control" value="{{this.email}}" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="userpassword" class="form-label">Password</label>
+                                            <div class="input-group input-group-merge">
+                                                <input name="password" type="text" id="" value="{{this.password}}"
+                                                    class="form-control" placeholder="Enter your password" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-first-name">First
+                                                name</label>
+                                            <input type="text" id="input-first-name" class="form-control"
+                                                value="{{this.firstname}}" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-last-name">Last
+                                                name</label>
+                                            <input type="text" id="input-last-name" class="form-control"
+                                                value="{{this.lastname}}" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="my-4" />
+                            <div class="row align-items-center">
+
+                                <div class="col-8">
+                                    <!-- <h6 class="heading-small text-muted mb-4">School information</h6> -->
+                                </div>
+
+                                <div class="col-4 text-right">
+                                    <!-- <button type="submit" class="btn btn-md btn-primary">Edit School</button> -->
+                                </div>
+                            </div>
+                            {{/each}}
+                            <h6 class="heading-small text-muted mb-4">School information</h6>
+                            <div class="pl-lg-4">
+                                <div class="row">
+                                    {{#each school_info}}
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-address">School
+                                                Name</label>
+                                            <input id="input-address" class="form-control" value="{{this.schoolName}}"
+                                                type="text" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-city">School ID</label>
+                                            <input type="text" id="input-city" class="form-control" placeholder="City"
+                                                value="{{this.schoolId}}" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-country">Address</label>
+                                            <input type="text" id="input-country" class="form-control"
+                                                placeholder="Country" value="{{this.address}}" disabled>
+                                        </div>
+                                    </div>
+                                    {{/each}}
+                                </div>
+                            </div>
+                            <hr class="my-4" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ****************************Update Modal************************************************** -->
+    <div class="modal fade updateModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="/schoolAd/profile/update" method="POST" enctype="multipart/form-data">
+                    <div class="card-header">
+                        <div class="row align-items-center">
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="building-number">Profile Image</label>
+                                    <img id="profile" class="img_edits rounded rounded-2" width="195" height="200" />
+                                    <input id="upload" name="profile_img" type="file" accept=".jpg,.jpeg"
+                                        onchange="readURL3(this);" class="form-control border-0" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="user_id" id="edit_id" class="form-control" hidden>
+                            <input type="text" name="schools_id" id="school_id_edit" class="form-control" hidden>
+                            <label for="name">Firstname</label>
+                            <input type="text" name="firstname" id="firstname_edit" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Lastname</label>
+                            <input type="text" name="lastname" id="lastname_edit" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="presentCampus">Email</label>
+                            <input type="email" name="email" id="edit_email" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="status_edit">Password</label>
+                            <input type="text" name="password" id="password_edit" class="form-control">
+                        </div>
+                        <div class="col-12 text-right">
+                            <button type="submit" class="btn btn-primary">
+                                Save
+                            </button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function readURL3(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $("#profile").attr("src", e.target.result);
+                $("#imgdatainput").val(e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $(function () {
+        $("#upload").on("change", function () {
+            readURL3(input);
+        });
+    });
+</script>
+<script>
+    $('.editBtn').click(function () {
+        $(".img_edits").attr("src", $(this).attr('data-profile'));
+        $('#edit_id').val($(this).attr('data-id'));
+        $('#edit_email').val($(this).attr('data-email'));
+        $('#firstname_edit').val($(this).attr('data-firstname'));
+        $('#lastname_edit').val($(this).attr('data-lastname'));
+        $('#password_edit').val($(this).attr('data-password'));
+        $('#school_id_edit').val($(this).attr(' data-school_id'));
+
+        $('.updateModal').modal('show');
+    });
+</script>
+<!--HIDE AND SHOW EYE PASSWORD-->
+<script>
+    function showPassword() {
+        var x = document.getElementById("password_edit");
+        if (x.type === "password_edit") {
+            x.type = "text";
+            $('#eye-show').addClass('show-password');
+        } else {
+            x.type = "password_edit";
+            $('#eye-show').removeClass('show-password');
+        }
+    }
+</script>

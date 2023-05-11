@@ -1,0 +1,1859 @@
+{{> schoolAd-sidenav building=true}}
+<div class="main-content" id="panel">
+  {{> schoolAd-topnav building=true}}
+  <!-- Header -->
+  <div class="header bg-primary pb-6">
+    <div class="container-fluid">
+      <div class="header-body">
+        <div class="row align-items-center py-4">
+          <div class="col-lg-6 col-7">
+            <nav
+              aria-label="breadcrumb"
+              class="d-none d-md-inline-block ml-md-4"
+            >
+              <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                <li class="breadcrumb-item">
+                  <a href="/schoolAd/dashboard"
+                    ><i class="fas fa-home"> Dashboard</i></a
+                  >
+                </li>
+                <li class="breadcrumb-item">
+                  <a href="/schoolAd/building"> Building List</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  Building Details
+                </li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Page content -->
+  <div class="container-fluid mt--6">
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <div class="card-header">
+            {{#if message }}
+            <div class="alert alert-{{alert}}" role="alert">
+              <strong>Alert!</strong> {{message}}
+            </div>
+            {{/if}}
+            <div class="row align-items-center">
+              <div class="col text-right">
+                <button
+                  class="btn btn-md btn-primary updateC"
+                  data-id="{{building._id}}"
+                  data-actual_img="{{building.actual_img}}"
+                  data-percentage="{{building.percentage}}"
+                  data-buildingCondition="{{building.buildingCondition}}"
+                >
+                  <i class="ni ni-settings text-white mr-2"></i> Update
+                  Condition
+                </button>
+                <a
+                  href="/schoolAd/room/{{building_id}}"
+                  class="btn btn-md btn-warning"
+                  ><i class="ni ni-shop text-white mr-2"></i>Room Details</a
+                >
+                <a
+                  href="/schoolAd/building/buildingWSF/{{building_id}}"
+                  class="btn btn-md btn-info"
+                  ><i class="ni ni-world-2 text-white mr-2"></i>Water &
+                  Sanitation</a
+                >
+              </div>
+            </div>
+          </div>
+          <form>
+            <fieldset disabled>
+              <div class="card-body">
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-lg-6 mb-4">
+                      <div
+                        id="carouselExampleIndicators"
+                        class="carousel slide col-lg-6"
+                        data-ride="carousel"
+                      >
+                        <ol class="carousel-indicators">
+                          <li
+                            data-target="#carouselExampleIndicators"
+                            data-slide-to="0"
+                            class="active"
+                          ></li>
+                          <li
+                            data-target="#carouselExampleIndicators"
+                            data-slide-to="1"
+                          ></li>
+                          <li
+                            data-target="#carouselExampleIndicators"
+                            data-slide-to="2"
+                          ></li>
+                        </ol>
+                        <div class="carousel-inner">
+                          <div class="carousel-item active">
+                            <img
+                              class="d-block w-100 rounded-lg"
+                              src="{{building.actual_img}}"
+                              alt="First slide"
+                            />
+                          </div>
+                          <div class="carousel-item">
+                            <img
+                              class="d-block w-100 rounded-lg"
+                              src="{{building.blueprint_img}}"
+                              alt="Second slide"
+                            />
+                          </div>
+                          <div class="carousel-item">
+                            <img
+                              class="d-block w-100 rounded-lg"
+                              src="{{building.proof_img}}"
+                              alt="Third slide"
+                            />
+                          </div>
+                        </div>
+                        <a
+                          class="carousel-control-prev"
+                          href="#carouselExampleIndicators"
+                          role="button"
+                          data-slide="prev"
+                        >
+                          <span
+                            class="carousel-control-prev-icon"
+                            aria-hidden="true"
+                          ></span>
+                          <span class="sr-only">Previous</span>
+                        </a>
+                        <a
+                          class="carousel-control-next"
+                          href="#carouselExampleIndicators"
+                          role="button"
+                          data-slide="next"
+                        >
+                          <span
+                            class="carousel-control-next-icon"
+                            aria-hidden="true"
+                          ></span>
+                          <span class="sr-only">Next</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-lg-5">
+                      <div class="form-group">
+                        <label class="form-control-label" for="building-number"
+                          >Building Number/Name</label
+                        >
+                        <input
+                          type="text"
+                          id="buildingNumber"
+                          class="form-control text-primary"
+                          value="{{building.buildingNumber}}"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-5">
+                      <div class="form-group">
+                        <label class="form-control-label" for="building-number"
+                          >Building Type</label
+                        >
+                        <input
+                          type="text"
+                          id="buildingNumber"
+                          class="form-control text-primary"
+                          value="{{building.buildingType}}"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label class="form-control-label">Fund Source</label>
+                        <input
+                          type="text"
+                          class="form-control text-primary"
+                          value="{{building.specificFundSource}}"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label class="form-control-label"
+                          >Specific Fund Source</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control text-primary"
+                          value="{{building.specificFundSource}}"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label class="form-control-label"
+                          >Building Condition</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control text-primary"
+                          value="{{building.buildingCondition}}"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label class="form-control-label"
+                          >Number of Storey</label
+                        >
+                        <input
+                          type="number"
+                          class="form-control text-primary"
+                          value="{{building.numberOfStorey}}"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label class="form-control-label"
+                          >Number of Rooms</label
+                        >
+                        <input
+                          type="number"
+                          class="form-control text-primary"
+                          value="{{building.numberOfRooms}}"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label class="form-control-label"
+                          >Classification of Building</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control text-primary"
+                          value="{{building.classificationOfBuilding}}"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label class="form-control-label">Year Completed</label>
+                        <input
+                          type="date"
+                          class="form-control text-primary"
+                          value="{{building.yearCompleted}}"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label class="form-control-label"
+                          >Date Acquisition</label
+                        >
+                        <input
+                          type="date"
+                          class="form-control text-primary"
+                          value="{{building.dateAcquisition}}"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label class="form-control-label"
+                          >Acquisition Cost
+                        </label>
+                        <input
+                          type="text"
+                          class="form-control text-primary"
+                          value="{{building.acquisitionCost}}"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr class="my-4" />
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label class="form-control-label"
+                          >Building Materials</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control text-primary"
+                          value="{{building.buildingMaterial}}"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label class="form-control-label">Book Value</label>
+                        <input
+                          type="text"
+                          class="form-control text-primary"
+                          value="{{building.bookValue}}"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label class="form-control-label"
+                          >Insurance Information</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control text-primary"
+                          value="{{building.insuranceInfo}}"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr class="my-4" />
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="form-group col-lg-4">
+                      <label class="form-control-label"
+                        >Building PWD Accessible?</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control text-primary"
+                        value="{{building.pwdAccessible}}"
+                      />
+                    </div>
+                    <div class="form-group col-lg-4">
+                      <label class="form-control-label"
+                        >Undergone Major Repair</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control text-primary"
+                        value="{{building.undergoneMajorRepair}}"
+                      />
+                    </div>
+                    <div class="form-group col-lg-4">
+                      <label class="form-control-label"
+                        >With Certificate of Acceptance?</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control text-primary"
+                        value="{{building.certificateOfAcceptance}}"
+                      />
+                    </div>
+                    <div class="form-group col-lg-4">
+                      <label class="form-control-label"
+                        >Building Include in the Boook of Accountant?</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control text-primary"
+                        value="{{building.includeDepedBook}}"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- **************************** update condition Modal ****************************** -->
+<div
+  class="modal fade updateCondition"
+  data-backdrop="static"
+  tabindex="-1"
+  role="dialog"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="card-header">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-xl-12">
+            <h2 class="text-center">BUILDING INFORMATION</h2>
+          </div>
+          <div class="col-xl-12 mt-5">
+            <div class="card">
+              <div class="card-header border-0">
+                <div class="row align-items-center">
+                  <div class="col">
+                    <h3 class="text-center">ROOM WITH DAMAGES</h3>
+                  </div>
+                </div>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-bordered" id="tangene">
+                  <thead class="thead-light text-center">
+                    <tr class="text-center">
+                      <th scope="col" lass="sort" data-sort="budget">
+                        Room Number
+                      </th>
+                      <th scope="col" class="sort" data-sort="budget">
+                        Room Condition
+                      </th>
+                      <th scope="col" class="sort" data-sort="status">
+                        Actual Usage
+                      </th>
+                      <th scope="col" class="sort" data-sort="status">
+                        Floor Number
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="list text-center">
+                    {{#each RoomDamage}}
+
+                    <tr class="text-center">
+                      <td scope="row">
+                        <div class="media align-items-center">
+                          <a class="avatar rounded-circle mr-3">
+                            <img
+                              alt="Image placeholder"
+                              src="{{this.actual_img}}"
+                            />
+                          </a>
+                          <div class="media-body">
+                            <a class="name mb-0 text-sm">{{this.roomNumber}}</a>
+                          </div>
+                        </div>
+                      </td>
+                      <td scope="row">
+                        <div class="media-body">
+                          <span class="name mb-0 text-sm"
+                            >{{this.roomCondition}}</span
+                          >
+                        </div>
+                      </td>
+                      <td scope="row">
+                        <div class="media-body">
+                          <span class="name mb-0 text-sm"
+                            >{{this.actualUsage}}</span
+                          >
+                        </div>
+                      </td>
+                      <td scope="row">
+                        <div class="media-body">
+                          <span class="name mb-0 text-sm">{{this.floor}}</span>
+                        </div>
+                      </td>
+                    </tr>
+                    {{/each}}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <form
+          action="/schoolAd/building/conditionUpdate"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          <div class="col-xl-12">
+
+              <div class="row border border-dark">
+                <div class="col-sm-12 mb-4 mt-3">
+                  <h2 class="text-center">
+                    Building Structure and Condition Form
+                    <a
+                      tabindex="0"
+                      class="btn btn-sm"
+                      role="button"
+                      data-toggle="popover"
+                      data-trigger="focus"
+                      title=""
+                      data-placement="top"
+                      data-content="Check the box, if the building have this kind of damage. Click next button if its done. "
+                    >
+                      <span class="material-icons"> help_outline </span>
+                    </a>
+                  </h2>
+                </div>
+                <div class="col-sm-12">
+                  <div class="row form-group">
+                    <div class="col-sm-2">
+                      <div class="form-check">
+                        <input
+                          class="form-check-input prc"
+                          type="checkbox"
+                          value="CEILING"
+                   
+                          id="ceiling"
+                          onclick="functionCondtion('CEILING')"
+                        />
+                        <label class="form-control-label" for="defaultCheck1">
+                          CEILING
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-sm-12 mt-2">
+                      <div class="row" id="ceilling_cond" style="display: none">
+                        <div class="col-sm-4">
+                          <div class="form-group">
+                            <label
+                              class="form-control-label"
+                              for="building-number"
+                              >LEVEL OF DAMAGE</label
+                            >
+                            <a
+                              tabindex="0"
+                              class="btn btn-sm"
+                              role="button"
+                              data-toggle="popover"
+                              data-trigger="focus"
+                              title=""
+                              data-placement="top"
+                              data-content="Refers to the curret level of damage of the ceiling."
+                            >
+                              <span class="material-icons"> help_outline </span>
+                            </a>
+                            <input
+                              type="number"
+                              id="description"
+                              value=""
+                              class="form-control"
+                              name="ceiling_lvl_dmg"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="form-group">
+                            <label
+                              class="form-control-label"
+                              for="building-number"
+                              >DESCRIPTIONS</label
+                            >
+                            <a
+                              tabindex="0"
+                              class="btn btn-sm"
+                              role="button"
+                              data-toggle="popover"
+                              data-trigger="focus"
+                              title=""
+                              data-placement="top"
+                              data-content="Refers to the curret description of the building."
+                            >
+                              <span class="material-icons"> help_outline </span>
+                            </a>
+                            <input
+                              type="text"
+                              id="description"
+                              value=""
+                              class="form-control"
+                              name="ceiling_description"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="form-group">
+                            <label
+                              class="form-control-label"
+                              for="building-number"
+                              >CEILING IMAGE</label
+                            >
+                            <a
+                              tabindex="0"
+                              class="btn btn-sm"
+                              role="button"
+                              data-toggle="popover"
+                              data-trigger="focus"
+                              title=""
+                              data-placement="top"
+                              data-content="Upload ceiling of the building"
+                            >
+                              <span class="material-icons"> help_outline </span>
+                            </a>
+                            <img
+                              id="bluePrintResult"
+                              class="rounded rounded-2"
+                              width=""
+                              height=""
+                            />
+                            <input
+                              id="upload5"
+                              name="ceiling_img"
+                              type="file"
+                              accept=".jpg,.jpeg"
+                              onchange="readURL4(this);"
+                              class="form-control border-0"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="row form-group">
+                    <div class="col-sm-2">
+                      <div class="form-check">
+                        <input
+                          class="form-check-input prc"
+                          type="checkbox"
+                          value="COLUMN"
+                         
+                          id="column"
+                          onclick="functionCondtion('COLUMN')"
+                        />
+                        <label class="form-control-label" for="defaultCheck1">
+                          COLUMN
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-sm-12 mt-2">
+                      <div class="row" id="column_cond" style="display: none">
+                        <div class="col-sm-4">
+                          <div class="form-group">
+                            <label
+                              class="form-control-label"
+                              for="building-number"
+                              >LEVEL OF DAMAGE</label
+                            >
+                            <a
+                              tabindex="0"
+                              class="btn btn-sm"
+                              role="button"
+                              data-toggle="popover"
+                              data-trigger="focus"
+                              title=""
+                              data-placement="top"
+                              data-content="Refers to the curret level of damage of the column."
+                            >
+                              <span class="material-icons"> help_outline </span>
+                            </a>
+                            <input
+                              type="number"
+                              id="description"
+                              value=""
+                              class="form-control"
+                              name="column_lvl_dmg"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="form-group">
+                            <label
+                              class="form-control-label"
+                              for="building-number"
+                              >DESCRIPTIONS</label
+                            >
+                            <a
+                              tabindex="0"
+                              class="btn btn-sm"
+                              role="button"
+                              data-toggle="popover"
+                              data-trigger="focus"
+                              title=""
+                              data-placement="top"
+                              data-content="Refers to the curret description of the building."
+                            >
+                              <span class="material-icons"> help_outline </span>
+                            </a>
+                            <input
+                              type="text"
+                              id="description"
+                              value=""
+                              class="form-control"
+                              name="column_description"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="form-group">
+                            <label
+                              class="form-control-label"
+                              for="building-number"
+                              >COLUMN IMAGE</label
+                            >
+                            <a
+                              tabindex="0"
+                              class="btn btn-sm"
+                              role="button"
+                              data-toggle="popover"
+                              data-trigger="focus"
+                              title=""
+                              data-placement="top"
+                              data-content="Upload column image of the building"
+                            >
+                              <span class="material-icons"> help_outline </span>
+                            </a>
+                            <img
+                              id="bluePrintResult"
+                              class="rounded rounded-2"
+                              width=""
+                              height=""
+                            />
+                            <input
+                              id="upload6"
+                              name="column_img"
+                              type="file"
+                              accept=".jpg,.jpeg"
+                              onchange="readURL5(this);"
+                              class="form-control border-0"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="row form-group">
+                    <div class="col-sm-2">
+                      <div class="form-check">
+                        <input
+                          type="number"
+                          id="roomPer"
+                          value="{{perall}}"
+                          hidden
+                        />
+                        <input
+                        type="number"
+                        id="noRoomsWDng"
+                        value="{{noRoomsWDng}}"
+                        hidden
+                      />
+                        <input
+                          class="form-check-input prc"
+                          onclick="functionCondtion('ROOF')"
+                          type="checkbox"
+                          value="ROOF"
+                      
+                          id="roof"
+                        />
+                        <label class="form-control-label" for="roof">
+                          ROOF
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-sm-12 mt-2">
+                      <div class="row" id="roof_cond" style="display: none">
+                        <div class="col-sm-4">
+                          <div class="form-group">
+                            <label
+                              class="form-control-label"
+                              for="building-number"
+                              >LEVEL OF DAMAGE</label
+                            >
+                            <a
+                              tabindex="0"
+                              class="btn btn-sm"
+                              role="button"
+                              data-toggle="popover"
+                              data-trigger="focus"
+                              title=""
+                              data-placement="top"
+                              data-content="Refers to the curret level of damage of the roof."
+                            >
+                              <span class="material-icons"> help_outline </span>
+                            </a>
+                            <input
+                              type="number"
+                              id="description"
+                              value=""
+                              class="form-control"
+                              name="roof_lvl_dmg"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="form-group">
+                            <label
+                              class="form-control-label"
+                              for="building-number"
+                              >DESCRIPTIONS</label
+                            >
+                            <a
+                              tabindex="0"
+                              class="btn btn-sm"
+                              role="button"
+                              data-toggle="popover"
+                              data-trigger="focus"
+                              title=""
+                              data-placement="top"
+                              data-content="Refers to the curret description of the building."
+                            >
+                              <span class="material-icons"> help_outline </span>
+                            </a>
+                            <input
+                              type="text"
+                              id="description"
+                              value=""
+                              class="form-control"
+                              name="roof_description"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="form-group">
+                            <label
+                              class="form-control-label"
+                              for="building-number"
+                              >ROOF IMAGE</label
+                            >
+                            <a
+                              tabindex="0"
+                              class="btn btn-sm"
+                              role="button"
+                              data-toggle="popover"
+                              data-trigger="focus"
+                              title=""
+                              data-placement="top"
+                              data-content="Upload roof image of the building"
+                            >
+                              <span class="material-icons"> help_outline </span>
+                            </a>
+                            <img
+                              id="bluePrintResult"
+                              class="rounded rounded-2"
+                              width=""
+                              height=""
+                            />
+                            <input
+                              id="upload7"
+                              name="roof_img"
+                              type="file"
+                              accept=".jpg,.jpeg"
+                              onchange="readURL6(this);"
+                              class="form-control border-0"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="row form-group">
+                    <div class="col-sm-2">
+                      <div class="form-check">
+                        <input
+                          class="form-check-input prc"
+                          type="checkbox"
+                          value="STAIRS"
+                          
+                          id="stairs"
+                          onclick="functionCondtion('STAIRS')"
+                        />
+                        <label class="form-control-label" for="defaultCheck1">
+                          STAIRS
+                        </label>
+                        <!-- <div class="row" id="stairs_cond" style="display: none">
+                          <div class="form-check form-check-inline">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              id="stairs_crack"
+                              name="stairs"
+                              value="CRACK"
+                            />
+                            <label
+                              class="form-check-label"
+                              for="inlineCheckbox1"
+                              >CRACK</label
+                            >
+                          </div>
+                        </div> -->
+                      </div>
+                    </div>
+                    <div class="col-sm-12 mt-2">
+                      <div class="row" id="stairs_cond" style="display: none">
+                        <div class="col-sm-4">
+                          <div class="form-group">
+                            <label
+                              class="form-control-label"
+                              for="building-number"
+                              >LEVEL OF DAMAGE</label
+                            >
+                            <a
+                              tabindex="0"
+                              class="btn btn-sm"
+                              role="button"
+                              data-toggle="popover"
+                              data-trigger="focus"
+                              title=""
+                              data-placement="top"
+                              data-content="Refers to the curret level of damage of the roof."
+                            >
+                              <span class="material-icons"> help_outline </span>
+                            </a>
+                            <input
+                              type="number"
+                              id="description"
+                              value=""
+                              class="form-control"
+                              name="stair_lvl_dmg"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="form-group">
+                            <label
+                              class="form-control-label"
+                              for="building-number"
+                              >DESCRIPTIONS</label
+                            >
+                            <a
+                              tabindex="0"
+                              class="btn btn-sm"
+                              role="button"
+                              data-toggle="popover"
+                              data-trigger="focus"
+                              title=""
+                              data-placement="top"
+                              data-content="Refers to the curret description of the building."
+                            >
+                              <span class="material-icons"> help_outline </span>
+                            </a>
+                            <input
+                              type="text"
+                              id="description"
+                              value=""
+                              class="form-control"
+                              name="stair_description"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="form-group">
+                            <label
+                              class="form-control-label"
+                              for="building-number"
+                              >STAIRS IMAGE</label
+                            >
+                            <a
+                              tabindex="0"
+                              class="btn btn-sm"
+                              role="button"
+                              data-toggle="popover"
+                              data-trigger="focus"
+                              title=""
+                              data-placement="top"
+                              data-content="Upload stairs image of the building"
+                            >
+                              <span class="material-icons"> help_outline </span>
+                            </a>
+                            <img
+                              id="bluePrintResult"
+                              class="rounded rounded-2"
+                              width=""
+                              height=""
+                            />
+                            <input
+                              id="upload8"
+                              name="stair_img"
+                              type="file"
+                              accept=".jpg,.jpeg"
+                              onchange="readURL7(this);"
+                              class="form-control border-0"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-12">
+                  <div class="row form-group">
+                    <div class="col-sm-2">
+                      <div class="form-check">
+                        <input
+                          class="form-check-input prc"
+                          type="checkbox"
+                          value="WALL"
+                          
+                          id="wall"
+                          onclick="functionCondtion('WALL')"
+                        />
+                        <label class="form-control-label" for="defaultCheck1">
+                          WALL
+                        </label>
+                        <!-- <div class="row" id="wall_cond" style="display: none">
+                          <div class="form-check form-check-inline">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              id="wall_crack"
+                              name="wall"
+                              value="CRACK"
+                            />
+                            <label
+                              class="form-check-label"
+                              for="inlineCheckbox1"
+                              >CRACK</label
+                            >
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              name="wall"
+                              id="wall_paint"
+                              value="FADED PAINT"
+                            />
+                            <label
+                              class="form-check-label"
+                              for="inlineCheckbox2"
+                              >FADED PAINT</label
+                            >
+                          </div>
+                        </div> -->
+                      </div>
+                    </div>
+                    <div class="col-sm-12 mt-2">
+                      <div class="row" id="wall_cond" style="display: none">
+                        <div class="col-sm-4">
+                          <div class="form-group">
+                            <label
+                              class="form-control-label"
+                              for="building-number"
+                              >LEVEL OF DAMAGE</label
+                            >
+                            <a
+                              tabindex="0"
+                              class="btn btn-sm"
+                              role="button"
+                              data-toggle="popover"
+                              data-trigger="focus"
+                              title=""
+                              data-placement="top"
+                              data-content="Refers to the curret level of damage of the roof."
+                            >
+                              <span class="material-icons"> help_outline </span>
+                            </a>
+                            <input
+                              type="number"
+                              id="description"
+                              value=""
+                              class="form-control"
+                              name="wall_lvl_dmg"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="form-group">
+                            <label
+                              class="form-control-label"
+                              for="building-number"
+                              >DESCRIPTIONS</label
+                            >
+                            <a
+                              tabindex="0"
+                              class="btn btn-sm"
+                              role="button"
+                              data-toggle="popover"
+                              data-trigger="focus"
+                              title=""
+                              data-placement="top"
+                              data-content="Refers to the curret description of the building."
+                            >
+                              <span class="material-icons"> help_outline </span>
+                            </a>
+                            <input
+                              type="text"
+                              id="description"
+                              value=""
+                              class="form-control"
+                              name="wall_description"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="form-group">
+                            <label
+                              class="form-control-label"
+                              for="building-number"
+                              >WALL IMAGE</label
+                            >
+                            <a
+                              tabindex="0"
+                              class="btn btn-sm"
+                              role="button"
+                              data-toggle="popover"
+                              data-trigger="focus"
+                              title=""
+                              data-placement="top"
+                              data-content="Upload wall image of the building"
+                            >
+                              <span class="material-icons"> help_outline </span>
+                            </a>
+                            <img
+                              id="bluePrintResult"
+                              class="rounded rounded-2"
+                              width=""
+                              height=""
+                            />
+                            <input
+                              id="upload9"
+                              name="wall_img"
+                              type="file"
+                              accept=".jpg,.jpeg"
+                              onchange="readURL8(this);"
+                              class="form-control border-0"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="row form-group">
+                    <div class="col-sm-2">
+                      <div class="form-check">
+                        <input
+                          class="form-check-input prc"
+                          type="checkbox"
+                          value="ETC"
+                        
+                          id="etc"
+                          onclick="functionCondtion('ETC')"
+                        />
+                        <label class="form-control-label" for="defaultCheck1">
+                          ETC
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-sm-12 mt-2">
+                      <div class="row" id="etc_cond" style="display: none">
+                        <div class="col-sm-4">
+                          <div class="form-group">
+                            <label
+                              class="form-control-label"
+                              for="building-number"
+                              >LEVEL OF DAMAGE</label
+                            >
+                            <a
+                              tabindex="0"
+                              class="btn btn-sm"
+                              role="button"
+                              data-toggle="popover"
+                              data-trigger="focus"
+                              title=""
+                              data-placement="top"
+                              data-content="Refers to the curret level of damage."
+                            >
+                              <span class="material-icons"> help_outline </span>
+                            </a>
+                            <input
+                              type="number"
+                              id="description"
+                              value=""
+                              class="form-control"
+                              name="etc_lvl_dmg"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="form-group">
+                            <label
+                              class="form-control-label"
+                              for="building-number"
+                              >DESCRIPTIONS</label
+                            >
+                            <a
+                              tabindex="0"
+                              class="btn btn-sm"
+                              role="button"
+                              data-toggle="popover"
+                              data-trigger="focus"
+                              title=""
+                              data-placement="top"
+                              data-content="Refers to the curret description of the building."
+                            >
+                              <span class="material-icons"> help_outline </span>
+                            </a>
+                            <input
+                              type="text"
+                              id="description"
+                              value=""
+                              class="form-control"
+                              name="etc_description"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="form-group">
+                            <label
+                              class="form-control-label"
+                              for="building-number"
+                              >ETC IMAGE</label
+                            >
+                            <a
+                              tabindex="0"
+                              class="btn btn-sm"
+                              role="button"
+                              data-toggle="popover"
+                              data-trigger="focus"
+                              title=""
+                              data-placement="top"
+                              data-content="Upload wall image of the building"
+                            >
+                              <span class="material-icons"> help_outline </span>
+                            </a>
+                            <img
+                              id="bluePrintResult"
+                              class="rounded rounded-2"
+                              width=""
+                              height=""
+                            />
+                            <input
+                              id="upload10"
+                              name="etc_img"
+                              type="file"
+                              accept=".jpg,.jpeg"
+                              onchange="readURL9(this);"
+                              class="form-control border-0"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12 text-center mt-3 mb-2">
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-primary"
+                    onclick="myFunction()"
+                  >
+                    Next
+                  </button>
+                </div>
+              </div>
+        
+          </div>
+        <!-- </form> -->
+          <div class="col-xl-12 pt-5 mt-3">
+            <div class="col-sm-12 mb-2">
+              <h2 class="text-center">BUILDING CONDTION UPDATE</h2>
+            </div>
+
+              <div class="pl-lg-4">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="building-number"
+                        >ACTUAL PHOTO</label
+                      >
+                      <a
+                        tabindex="0"
+                        class="btn btn-sm"
+                        role="button"
+                        data-toggle="popover"
+                        data-trigger="focus"
+                        title=""
+                        data-placement="top"
+                        data-content="Upload actual photo of the building."
+                      >
+                        <span class="material-icons"> help_outline </span></a
+                      >
+                      <img
+                        class="img-thumbnail"
+                        id="actual_img_edit"
+                        height="200"
+                        width="195"
+                      />
+                      <input
+                        id="upload4"
+                        name="actual_img"
+                        type="file"
+                        accept=".jpg,.jpeg"
+                        onchange="readURL3(this);"
+                        class="form-control border-0"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        name="edit_id"
+                        id="edit_id"
+                        class="form-control"
+                        hidden
+                      />
+                      <input
+                        type="text"
+                        name="roof"
+                        id="rf"
+                        class="form-control"
+                        hidden
+                      />
+                      <input
+                        type="text"
+                        name="stair"
+                        id="str"
+                        class="form-control"
+                        hidden
+                      />
+                      <input
+                        type="text"
+                        name="ceiling"
+                        id="cl"
+                        class="form-control"
+                        hidden
+                      />
+                      <input
+                        type="text"
+                        name="wall"
+                        id="wl"
+                        class="form-control"
+                        hidden
+                      />
+                      <input
+                        type="text"
+                        name="column"
+                        id="colmn"
+                        class="form-control"
+                        hidden
+                      />
+                      <input
+                      type="text"
+                      name="etc"
+                      id="etcs"
+                      class="form-control"
+                      hidden
+                    />
+                      <!-- <input
+                        type="text"
+                        id="recom"
+                        value=""
+                        class="form-control"
+                        name=""
+                        readonly
+                      /> -->
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="building-number"
+                        >BUILDING DESCRIPTIONS</label
+                      >
+                      <a
+                        tabindex="0"
+                        class="btn btn-sm"
+                        role="button"
+                        data-toggle="popover"
+                        data-trigger="focus"
+                        title=""
+                        data-placement="top"
+                        data-content="Refers to the curret status of the buildings condition. It refers to the number of rooms with damage"
+                      >
+                        <span class="material-icons"> help_outline </span>
+                      </a>
+                      <input
+                        type="text"
+                        id="recom"
+                        value=""
+                        class="form-control"
+                        name="description"
+                        readonly
+                      />
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="buildingCondition"
+                        >BUILDING CONDITION</label
+                      >
+                      <a
+                        tabindex="0"
+                        class="btn btn-sm"
+                        role="button"
+                        data-toggle="popover"
+                        data-trigger="focus"
+                        title=""
+                        data-placement="top"
+                        data-content="Refers to the current physical state of a building."
+                      >
+                        <span class="material-icons"> help_outline </span>
+                      </a>
+                      <select
+                        id="buildingCondition_edit"
+                        name="buildingCondition"
+                        class="form-control"
+                      >
+                        <option
+                          selected
+                          value="buildingCondition_edit"
+                        ></option>
+                        <option>GOOD CONDITION</option>
+                        <option>MINOR DAMAGE</option>
+                        <option>MAJOR DAMAGE</option>
+                        <option>CONDEMNED/DEMOLATION</option>
+                        <option>COMPLETION</option>
+                        <option>ON GOING CONSTRUCTION</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row align-items-center">
+                  <!-- <div class="col-8">
+                                    </div> -->
+                  <div class="col-lg-12 text-center">
+                    <button id="btn-save" type="submit" class="btn btn-primary">
+                      UPDATE
+                    </button>
+                  </div>
+                </div>
+              </div>
+           
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $(document).ready(function () {});
+  function functionCondtion(cond) {
+    if (cond == "ROOF") {
+      console.log("naa roof");
+      var x = document.getElementById("roof_cond");
+      if (x.style.display == "none") {
+        // x.style.display = "block";
+        $("#roof_cond").toggle();
+      } else {
+        x.style.display = "none";
+      }
+    } else if (cond == "CEILING") {
+      console.log("naa roof");
+      var x = document.getElementById("ceilling_cond");
+      if (x.style.display == "none") {
+        $("#ceilling_cond").toggle();
+      } else {
+        x.style.display = "none";
+      }
+    } else if (cond == "WALL") {
+      console.log("naa roof");
+      var x = document.getElementById("wall_cond");
+      if (x.style.display == "none") {
+        $("#wall_cond").toggle();
+      } else {
+        x.style.display = "none";
+      }
+    } else if (cond == "STAIRS") {
+      console.log("naa roof");
+      var x = document.getElementById("stairs_cond");
+      if (x.style.display == "none") {
+        $("#stairs_cond").toggle();
+      } else {
+        x.style.display = "none";
+      }
+    } else if (cond == "COLUMN") {
+      console.log("naa roof");
+      var x = document.getElementById("column_cond");
+      if (x.style.display == "none") {
+        $("#column_cond").toggle();
+      } else {
+        x.style.display = "none";
+      }
+    }else if (cond == "ETC") {
+      console.log("naa roof");
+      var x = document.getElementById("etc_cond");
+      if (x.style.display == "none") {
+        $("#etc_cond").toggle();
+      } else {
+        x.style.display = "none";
+      }
+    }
+  }
+  function myFunction() {
+    let Croof = $("#roof").is(":checked");
+    if (Croof == true) {
+      var Roof_data = {
+        roof: document.getElementById("roof").value,
+      };
+      var Roof = Roof_data.roof;
+    } else {
+      Roof = "";
+    }
+    // console.log("roof_total", roof_total);
+    // var roof_total = parseInt(roof_total);
+    // let Cpaint = $("#paint").is(":checked");
+    // if (Cpaint == true) {
+    //   var paint = 10;
+    //   var Paints = document.getElementById("paint").value;
+    // } else {
+    //   var paint = 0;
+    //   var Paints = "Unchecked";
+    // }
+    // var paints = parseInt(paint);
+    let Cceiling = $("#ceiling").is(":checked");
+    if (Cceiling == true) {
+      var Ceiling_data = {
+        ceiling: document.getElementById("ceiling").value,
+      };
+      var Ceiling = Ceiling_data.ceiling;
+    } else {
+      Ceiling = "";
+    }
+
+    let Cwall = $("#wall").is(":checked");
+    if (Cwall == true) {
+      // let Cwall_crack = $("#wall_crack").is(":checked");
+      // let Cwall_paint = $("#wall_paint").is(":checked");
+      // var wall_total, wall_crack, wall_paint;
+
+      var Wall_data = {
+        wall: document.getElementById("wall").value,
+      };
+      var Walls = Wall_data.wall;
+      // if (Cwall_crack == true) {
+      //   wall_crack = 15;
+      //   Wall_data.crack = document.getElementById("wall_crack").value;
+      //   Walls = Walls + Wall_data.crack + " , ";
+      // } else {
+      //   wall_crack = 0;
+      //   Walls = Walls;
+      // }
+      // if (Cwall_paint == true) {
+      //   wall_paint = 8;
+      //   Wall_data.paint = document.getElementById("wall_paint").value;
+      //   Walls = Walls + Wall_data.paint;
+      // } else {
+      //   wall_paint = 0;
+      //   Walls = Walls;
+      // }
+      // wall_total = wall_crack + wall_paint;
+      // console.log("walls", Walls);
+    } else {
+      // wall_total = 0;
+      Walls = "";
+    }
+    // var walls = parseInt(wall);
+    let Cstairs = $("#stairs").is(":checked");
+    if (Cstairs == true) {
+      var Stair_data = {
+        stair: document.getElementById("stairs").value,
+      };
+      var Stair = Stair_data.stair;
+
+    } else {
+      Stair = "";
+    }
+
+    let Ccolumn = $("#column").is(":checked");
+    if (Ccolumn == true) {
+      var Column_data = {
+        column: document.getElementById("column").value,
+      };
+      var Column = Column_data.column ;
+
+    } else {
+      Column = "";
+    }
+    let Cetc = $("#etc").is(":checked");
+    if (Cetc == true) {
+      var Etc_data = {
+        etc: document.getElementById("etc").value,
+      };
+      var Etc = Etc_data.etc;
+
+    } else {
+      Etc = "";
+    }
+    // console.log("Column", Column);
+    // console.log("column_total", column_total);
+
+    var roomPer = document.getElementById("roomPer").value;
+    var room = parseInt(roomPer);
+    var noRoomWDng = document.getElementById("noRoomsWDng").value;
+    var less = `${noRoomWDng} of the rooms in this building are damaged.`
+    // var room = parseInt(roomPer);
+    // let total =
+    //   roof_total + stair_total + ceiling_total + wall_total + column_total;
+    // let percentage = total;
+
+    // if (percentage == 0) {
+    //   var less = "The recommended building condition is Good Condition";
+    // }
+    // if (percentage > 0 && percentage <= 45) {
+    //   var less = "The recommended building condition is Minor Damage";
+    // }
+    // if (percentage > 45 && percentage <= 100) {
+    //   var less = "The recommended building condition is Major Damage";
+    // }
+    // console.log(percentage);
+    // console.log(total);
+
+    // $("#percentage").val(percentage);
+    $("#recom").val(less);
+    $("#rf").val(Roof);
+    $("#str").val(Stair);
+    $("#cl").val(Ceiling);
+    $("#wl").val(Walls);
+    $("#colmn").val(Column);
+    $("#etcs").val(Etc);
+  }
+</script>
+<!-- **************************** update codition script ****************************** -->
+<script>
+  $(".updateC").click(function () {
+    $("#edit_id").val($(this).attr("data-id"));
+    $("#actual_img_edit").attr("src", $(this).attr("data-actual_img"));
+    $("#percentage").val($(this).attr("data-percentage"));
+    $("#buildingCondition_edit").val($(this).attr("data-buildingCondition"));
+
+    $(".updateCondition").modal("show");
+  });
+</script>
+<!-- UPLAOD Image UPDATED ACTUAL PHOTO-->
+<script>
+  /*  ==========================================
+      SHOW UPLOADED IMAGE
+  * ========================================== */
+  function readURL3(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        // $("#actual_img_edit").attr("src", e.target.result);
+        $("#imgdatainput").val(e.target.result);
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $(function () {
+    $("#upload4").on("change", function () {
+      readURL3(input);
+    });
+  });
+
+  /*  ==========================================
+      SHOW UPLOADED IMAGE NAME
+  * ========================================== */
+  var input = document.getElementById("upload4");
+  var infoArea = document.getElementById("upload-label");
+
+  input.addEventListener("change", showFileName);
+  function showFileName(event) {
+    var input = event.srcElement;
+    var fileName = input.files[0].name;
+    infoArea.textContent = "File name: " + fileName;
+  };
+
+
+  /*  ==========================================
+      SHOW UPLOADED IMAGE
+  * ========================================== */
+  function readURL4(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        // $("#actual_img_edit").attr("src", e.target.result);
+        $("#imgdatainput").val(e.target.result);
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $(function () {
+    $("#upload5").on("change", function () {
+      readURL4(input);
+    });
+  });
+
+  /*  ==========================================
+      SHOW UPLOADED IMAGE NAME
+  * ========================================== */
+  var input = document.getElementById("upload5");
+  var infoArea = document.getElementById("upload-label");
+
+  input.addEventListener("change", showFileName);
+  function showFileName(event) {
+    var input = event.srcElement;
+    var fileName = input.files[0].name;
+    infoArea.textContent = "File name: " + fileName;
+  };
+    /*  ==========================================
+      SHOW UPLOADED IMAGE
+  * ========================================== */
+  function readURL5(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        // $("#actual_img_edit").attr("src", e.target.result);
+        $("#imgdatainput").val(e.target.result);
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $(function () {
+    $("#upload6").on("change", function () {
+      readURL5(input);
+    });
+  });
+
+  /*  ==========================================
+      SHOW UPLOADED IMAGE NAME
+  * ========================================== */
+  var input = document.getElementById("upload6");
+  var infoArea = document.getElementById("upload-label");
+
+  input.addEventListener("change", showFileName);
+  function showFileName(event) {
+    var input = event.srcElement;
+    var fileName = input.files[0].name;
+    infoArea.textContent = "File name: " + fileName;
+  };
+    /*  ==========================================
+      SHOW UPLOADED IMAGE
+  * ========================================== */
+  function readURL6(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        // $("#actual_img_edit").attr("src", e.target.result);
+        $("#imgdatainput").val(e.target.result);
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $(function () {
+    $("#upload7").on("change", function () {
+      readURL6(input);
+    });
+  });
+
+  /*  ==========================================
+      SHOW UPLOADED IMAGE NAME
+  * ========================================== */
+  var input = document.getElementById("upload7");
+  var infoArea = document.getElementById("upload-label");
+
+  input.addEventListener("change", showFileName);
+  function showFileName(event) {
+    var input = event.srcElement;
+    var fileName = input.files[0].name;
+    infoArea.textContent = "File name: " + fileName;
+  };
+  
+  function readURL7(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        // $("#actual_img_edit").attr("src", e.target.result);
+        $("#imgdatainput").val(e.target.result);
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $(function () {
+    $("#upload8").on("change", function () {
+      readURL7(input);
+    });
+  });
+
+  /*  ==========================================
+      SHOW UPLOADED IMAGE NAME
+  * ========================================== */
+  var input = document.getElementById("upload8");
+  var infoArea = document.getElementById("upload-label");
+
+  input.addEventListener("change", showFileName);
+  function showFileName(event) {
+    var input = event.srcElement;
+    var fileName = input.files[0].name;
+    infoArea.textContent = "File name: " + fileName;
+  };
+  function readURL8(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        // $("#actual_img_edit").attr("src", e.target.result);
+        $("#imgdatainput").val(e.target.result);
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $(function () {
+    $("#upload9").on("change", function () {
+      readURL8(input);
+    });
+  });
+
+  /*  ==========================================
+      SHOW UPLOADED IMAGE NAME
+  * ========================================== */
+  var input = document.getElementById("upload9");
+  var infoArea = document.getElementById("upload-label");
+
+  input.addEventListener("change", showFileName);
+  function showFileName(event) {
+    var input = event.srcElement;
+    var fileName = input.files[0].name;
+    infoArea.textContent = "File name: " + fileName;
+  };
+  function readURL9(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        // $("#actual_img_edit").attr("src", e.target.result);
+        $("#imgdatainput").val(e.target.result);
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $(function () {
+    $("#upload10").on("change", function () {
+      readURL9(input);
+    });
+  });
+
+  /*  ==========================================
+      SHOW UPLOADED IMAGE NAME
+  * ========================================== */
+  var input = document.getElementById("upload10");
+  var infoArea = document.getElementById("upload-label");
+
+  input.addEventListener("change", showFileName);
+  function showFileName(event) {
+    var input = event.srcElement;
+    var fileName = input.files[0].name;
+    infoArea.textContent = "File name: " + fileName;
+  };
+</script>
+<script>
+  $(document).ready(function () {
+    $('[data-toggle="popover"]').popover();
+  });
+</script>
